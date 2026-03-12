@@ -1,0 +1,11 @@
+package de.projectmodding.core.model.mod.files;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@SuperBuilder()
+public class Model_X_Model extends BaseFile{
+}

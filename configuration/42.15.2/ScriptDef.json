@@ -1,0 +1,1097 @@
+{
+  "filePath": "scripts",
+  "closeKillMove": [
+    "Jaw_Stab"
+  ],
+  "attachmentType": [
+    "Bedroll",
+    "BigBlade",
+    "BigWeapon",
+    "Guitar",
+    "GuitarAcoustic",
+    "Hammer",
+    "Holster",
+    "HolsterSmall",
+    "Knife",
+    "MeatCleaver",
+    "Nightstick",
+    "NotKnife",
+    "Pan",
+    "Racket",
+    "Rifle",
+    "Saucepan",
+    "Screwdriver",
+    "Shovel",
+    "Sword",
+    "Walkie",
+    "Webbing",
+    "Wrench",
+    "BedrollBottom",
+    "BedrollBottomALICE",
+    "BedrollBottomBig",
+    "HolsterAnkle",
+    "HolsterLeft",
+    "HolsterRight",
+    "HolsterShoulder",
+    "SmallBeltLeft",
+    "SmallBeltRight",
+    "WebbingLeft",
+    "WebbingRight"
+  ],
+  "bloodClothingType": [
+    "Apron",
+    "ShirtNoSleeves",
+    "JumperNoSleeves",
+    "Shirt",
+    "ShirtLongSleeves",
+    "Jumper",
+    "Jacket",
+    "LongJacket",
+    "ShortsShort",
+    "Trousers",
+    "Shoes",
+    "FullHelmet",
+    "Bag",
+    "Hands",
+    "Head",
+    "Neck",
+    "Groin",
+    "UpperBody",
+    "LowerBody",
+    "LowerLegs",
+    "UpperLegs",
+    "LowerArms",
+    "UpperArms",
+    "Hand_L",
+    "Hand_R",
+    "ForeArm_L",
+    "ForeArm_R",
+    "UpperArm_L",
+    "UpperArm_R",
+    "UpperLeg_L",
+    "UpperLeg_R",
+    "LowerLeg_L",
+    "LowerLeg_R",
+    "Foot_L",
+    "Foot_R"
+  ],
+  "foodType": [
+    "Bacon",
+    "Bean",
+    "Beef",
+    "Berry",
+    "Bread",
+    "Candy",
+    "CatFood",
+    "Cheese",
+    "Chocolate",
+    "Citrus",
+    "Cocoa",
+    "Coffee",
+    "DogFood",
+    "Dressing",
+    "Egg",
+    "Fish",
+    "Fruits",
+    "Game",
+    "Greens",
+    "Herb",
+    "HotPepper",
+    "Insect",
+    "Juice",
+    "Meat",
+    "Milk",
+    "Mushroom",
+    "NoExplicit",
+    "Nut",
+    "Oil",
+    "Pasta",
+    "Poultry",
+    "Rice",
+    "Roe",
+    "Sausage",
+    "Seafood",
+    "Seed",
+    "Stock",
+    "Sugar",
+    "Tea",
+    "Thickener",
+    "Vegetable",
+    "Vegetables",
+    "Venison"
+  ],
+  "scriptBlockType": [
+    "All",
+    "AlarmClock",
+    "AlarmClockClothing",
+    "Animal",
+    "Clothing",
+    "Container",
+    "Drainable",
+    "Food",
+    "Key",
+    "KeyRing",
+    "Literature",
+    "Map",
+    "Moveable",
+    "Normal",
+    "Radio",
+    "Weapon",
+    "WeaponPart"
+  ],
+  "scriptType": [
+    "entityComponent",
+    "vehicle",
+    "entity",
+    "item",
+    "recipe",
+    "uniquerecipe",
+    "evolvedrecipe",
+    "fixing",
+    "animationsMesh",
+    "mannequin",
+    "model",
+    "spriteModel",
+    "sound",
+    "soundTimeline",
+    "vehicle",
+    "animation",
+    "vehicleEngineRPM",
+    "itemConfig",
+    "entity",
+    "xuiLayout",
+    "xuiStyle",
+    "xuiDefaultStyle",
+    "xuiGlobalColors",
+    "xuiSkin",
+    "xuiConfig",
+    "itemFilter",
+    "craftRecipe",
+    "fluidFilter",
+    "stringList",
+    "energy",
+    "fluid",
+    "physicsShape",
+    "timedAction",
+    "ragdoll",
+    "physicsHitReaction",
+    "clock",
+    "character_trait_definition",
+    "character_profession_definition"
+  ],
+  "attributeList": [
+    {
+      "keyName": "ScriptBlockType",
+      "dataType": "scriptType",
+      "description": "[ScriptType]",
+      "action": "Transform_Script_Type",
+      "required": true
+    },
+    {
+      "keyName": "ItemType",
+      "dataType": "scriptBlockType",
+      "description": "[ScriptBlockType]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      },
+      "required": true
+    },
+    {
+      "keyName": "alcoholPower",
+      "dataType": "Float",
+      "description": "[ScriptAlcoholPower]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "conditionMax",
+      "dataType": "Integer",
+      "description": "[ScriptConditionMax]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "lightStrength",
+      "dataType": "Float",
+      "description": "[ScriptLightStrength]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "lightDistance",
+      "dataType": "Integer",
+      "description": "[ScriptLightDistance]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "weight",
+      "dataType": "Float",
+      "description": "[ScriptWeight]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "torchCone",
+      "dataType": "Boolean",
+      "description": "[ScriptTorchCone]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "activatedItem",
+      "dataType": "Boolean",
+      "description": "[ScriptActivatedItem]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "boredomChange",
+      "dataType": "Integer",
+      "description": "[ScriptBoredomChange]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "stressChange",
+      "dataType": "Integer",
+      "description": "[ScriptStressChange]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "foodSicknessChange",
+      "dataType": "Integer",
+      "description": "[ScriptFoodSicknessChange]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "unhappyChange",
+      "dataType": "Integer",
+      "description": "[ScriptUnhappyChange]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "replaceOnUseOn",
+      "dataType": "Integer",
+      "description": "[ScriptReplaceOnUseOn]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "requireInHandOrInventory",
+      "dataType": "Array",
+      "subType": "String",
+      "delimiter": "/",
+      "description": "[ScriptRequireInHandOrInventory]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "attachmentsProvided",
+      "dataType": "Array",
+      "subType": "String",
+      "delimiter": ";",
+      "description": "[ScriptAttachmentsProvided]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "attachmentReplacement",
+      "dataType": "String",
+      "description": "[ScriptAttachmentReplacement]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "canStack",
+      "dataType": "Boolean",
+      "description": "[ScriptCanStack]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "count",
+      "dataType": "Integer",
+      "description": "[ScriptCount]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "fatigueChange",
+      "dataType": "Float",
+      "description": "[ScriptFatigueChange]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "tooltip",
+      "dataType": "String",
+      "description": "[ScriptTooltip]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "displayCategory",
+      "dataType": "String",
+      "description": "[ScriptDisplayCategory]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "alcoholic",
+      "dataType": "Boolean",
+      "description": "[ScriptAlcoholic]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "requiresEquippedBothHands",
+      "dataType": "Boolean",
+      "description": "[ScriptRequiresEquippedBothHands]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "breakSound",
+      "dataType": "File",
+      "description": "[ScriptBreakSound]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "replaceOnUse",
+      "dataType": "String",
+      "description": "[ScriptReplaceOnUse]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "bandagePower",
+      "dataType": "Float",
+      "description": "[ScriptBandagePower]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "reduceInfectionPower",
+      "dataType": "Float",
+      "description": "[ScriptReduceInfectionPower]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "canBeRemote",
+      "dataType": "Boolean",
+      "description": "[ScriptCanBeRemote]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "remoteController",
+      "dataType": "Boolean",
+      "description": "[ScriptRemoteController]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "remoteRange",
+      "dataType": "Integer",
+      "description": "[ScriptRemoteRange]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "countDownSound",
+      "dataType": "File",
+      "description": "[ScriptCountDownSound]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "explosionSound",
+      "dataType": "File",
+      "description": "[ScriptExplosionSound]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "colorRed",
+      "dataType": "Integer",
+      "min": 0,
+      "max": 255,
+      "description": "[ScriptColorRed]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "colorBlue",
+      "dataType": "Integer",
+      "min": 0,
+      "max": 255,
+      "description": "[ScriptColorBlue]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "colorGreen",
+      "dataType": "Integer",
+      "min": 0,
+      "max": 255,
+      "description": "[ScriptColorGreen]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "evolvedRecipeName",
+      "dataType": "String",
+      "description": "[ScriptEvolvedRecipeName]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "metalValue",
+      "dataType": "Float",
+      "description": "[ScriptMetalValue]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "wet",
+      "dataType": "Boolean",
+      "description": "[ScriptWet]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "wetCooldown",
+      "dataType": "Float",
+      "description": "[ScriptWetCooldown]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "itemWhenDry",
+      "dataType": "String",
+      "description": "[ScriptItemWhenDry]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "itemCapacity",
+      "dataType": "Integer",
+      "description": "[ScriptItemCapacity]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "maxCapacity",
+      "dataType": "Integer",
+      "description": "[ScriptMaxCapacity]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "brakeForce",
+      "dataType": "Integer",
+      "description": "[ScriptBrakeForce]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "durability",
+      "dataType": "Float",
+      "description": "[ScriptDurability]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "chanceToSpawnDamaged",
+      "dataType": "Integer",
+      "min": 0,
+      "max": 100,
+      "description": "[ScriptChanceToSpawnDamaged]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "conditionLowerStandard",
+      "dataType": "Float",
+      "description": "[ScriptConditionLowerStandard]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "conditionLowerOffroad",
+      "dataType": "Float",
+      "description": "[ScriptConditionLowerOffroad]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "wheelFriction",
+      "dataType": "Float",
+      "description": "[ScriptWheelFriction]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "suspensionCompression",
+      "dataType": "Float",
+      "description": "[ScriptSuspensionCompression]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "engineLoudness",
+      "dataType": "Float",
+      "description": "[ScriptEngineLoudness]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "suspensionDamping",
+      "dataType": "Float",
+      "description": "[ScriptSuspensionDamping]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "inverseCoughProbability",
+      "dataType": "Integer",
+      "min": 0,
+      "max": 100,
+      "description": "[ScriptInverseCoughProbability]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "inverseCoughProbabilitySmoker",
+      "dataType": "Integer",
+      "min": 0,
+      "max": 100,
+      "description": "[ScriptInverseCoughProbabilitySmoker]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "bloodLocation",
+      "dataType": "Array",
+      "subType": "bloodClothingType",
+      "delimiter": ";",
+      "description": "[ScriptBloodLocation]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "closeKillMove",
+      "dataType": "closeKillMove",
+      "description": "[ScriptCloseKillMove]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "ammoType",
+      "dataType": "String",
+      "description": "[ScriptAmmoType]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "maxAmmo",
+      "dataType": "Integer",
+      "description": "[ScriptMaxAmmo]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "gunType",
+      "dataType": "Array",
+      "subType": "String",
+      "delimiter": ";",
+      "description": "[ScriptGunType]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "keyName": "attachmentType",
+      "dataType": "attachmentType",
+      "description": "[ScriptAttachmentType]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

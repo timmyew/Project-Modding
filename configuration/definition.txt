@@ -1,0 +1,11 @@
+KeyName
+DataType = String, Float, Integer, Boolean, Array, File
+Description
+Delimiter = Array Delimiter
+SubType = Types of the configuration Script
+condition = or && and
+or = has = Array of String
+and = has = array of String
+File
+min
+max

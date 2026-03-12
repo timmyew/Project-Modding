@@ -1,0 +1,86 @@
+{
+  "filePath": "version",
+  "category": [
+    "map",
+    "vehicle",
+    "features",
+    "modpack"
+  ],
+  "attributeList": [
+    {
+      "keyName": "name",
+      "dataType": "String",
+      "description": "[ModInfoName]"
+    },
+    {
+      "keyName": "id",
+      "dataType": "String",
+      "description": "[ModInfoId]"
+    },
+    {
+      "keyName": "author",
+      "dataType": "String",
+      "description": "[ModInfoAuthor]"
+    },
+    {
+      "keyName": "description",
+      "dataType": "String",
+      "description": "[ModInfoDescription]"
+    },
+    {
+      "keyName": "url",
+      "dataType": "String",
+      "description": "[ModInfoUrl]"
+    },
+    {
+      "keyName": "poster",
+      "dataType": "String",
+      "description": "[ModInfoPoster]"
+    },
+    {
+      "keyName": "icon",
+      "dataType": "String",
+      "description": "[ModInfoIcon]"
+    },
+    {
+      "keyName": "modversion",
+      "dataType": "String",
+      "description": "[ModInfoVersion]"
+    },
+    {
+      "keyName": "require",
+      "dataType": "Array",
+      "subType": "String",
+      "delimiter": ",",
+      "description": "[ModInfoRequire]"
+    },
+    {
+      "keyName": "incompatible",
+      "dataType": "Array",
+      "subType": "String",
+      "delimiter": ",",
+      "description": "[ModInfoIncompatible]"
+    },
+    {
+      "keyName": "loadModAfter",
+      "dataType": "Array",
+      "subType": "String",
+      "delimiter": ",",
+      "description": "[ModInfoLoadModAfter]"
+    },
+    {
+      "keyName": "category",
+      "dataType": "Array",
+      "subType": "category",
+      "delimiter": ",",
+      "description": "[ModInfoCategory]"
+    },
+    {
+      "keyName": "pack",
+      "dataType": "Array",
+      "subType": "String",
+      "delimiter": ",",
+      "description": "[ModInfoPack]"
+    }
+  ]
+}
