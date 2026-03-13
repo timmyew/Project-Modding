@@ -4,9 +4,10 @@ import de.projectmodding.core.model.AttributeModel;
 
 import javax.swing.*;
 
-public class StringComponent extends JPanel implements IDataTypeComponent {
+public class StringComponent extends AbstractComponentPanel implements IDataTypeComponent {
+
     @Override
-    public void setAttribute(AttributeModel attribute) {
+    protected void createUIComponents() {
 
     }
 

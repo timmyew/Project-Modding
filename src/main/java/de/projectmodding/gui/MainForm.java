@@ -7,17 +7,17 @@ import de.projectmodding.core.component.event.event.ModCreationEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
 import de.projectmodding.core.component.loader.DefinitionLoader;
 import de.projectmodding.core.controller.IMainController;
-import de.projectmodding.core.enums.ModDataKey;
 import de.projectmodding.core.model.definition.DefinitionVersionMap;
+import de.projectmodding.core.model.event.FillItemEventModel;
 import de.projectmodding.core.model.mod.ModPackageModel;
 import de.projectmodding.core.model.mod.files.BaseFile;
 import de.projectmodding.gui.manager.FilePanelManager;
-import de.projectmodding.gui.panel.ScriptPanel;
 import de.projectmodding.gui.popup.TreeJPopupMenu;
 import de.projectmodding.gui.tree.node.ModPackageTreeNode;
 import de.projectmodding.gui.tree.renderer.ModPackageTreeCellRenderer;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.tree.DefaultTreeModel;
@@ -73,7 +73,7 @@ public final class MainForm extends BaseFrame {
         this.setMinimumSize(new Dimension(MINIMUM_WIDTH, MINIMUM_HEIGHT));
     }
 
-    private ContainerListener createDefaultDetailPanelContainerListener(){
+    private ContainerListener createDefaultDetailPanelContainerListener() {
         return new ContainerListener() {
 
             @Override
@@ -86,7 +86,7 @@ public final class MainForm extends BaseFrame {
                 updateUI();
             }
 
-            private void updateUI(){
+            private void updateUI() {
                 revalidate();
                 repaint();
             }
@@ -105,7 +105,7 @@ public final class MainForm extends BaseFrame {
         newItem.addActionListener(Action -> {
             if (selectedNode != null) {
                 ModPackageTreeNode node = new ModPackageTreeNode(controller.generateModData(selectedNode.getVersion(),
-                                selectedNode.getModName(), selectedNode.getKey()));
+                        selectedNode.getModName(), selectedNode.getKey()));
                 selectedNode.add(node);
 
                 if (expandedPath != null)
@@ -131,7 +131,7 @@ public final class MainForm extends BaseFrame {
                 int selectedRow = modTree.getRowForLocation(e.getX(), e.getY());
                 modTree.setSelectionRow(selectedRow);
 
-                if (selectedRow != -1 && modTree.getLastSelectedPathComponent() instanceof ModPackageTreeNode node){
+                if (selectedRow != -1 && modTree.getLastSelectedPathComponent() instanceof ModPackageTreeNode node) {
                     if (e.getButton() == MouseEvent.BUTTON3 && node.canAddFiles()) {
                         expandedPath = modTree.getPathForRow(selectedRow);
                         selectedNode = node;
@@ -139,24 +139,36 @@ public final class MainForm extends BaseFrame {
                         treePopupMenu.setDoHide(false);
                         treePopupMenu.setVisible(true);
                         removeAttributePanel();
-                    }
-                    else if ((e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) && node.getBaseFile() != null) {
-                        loadAttributePanel(node.getBaseFile());
-                    }
-                    else
+                    } else if ((e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) && node.getBaseFile() != null) {
+                        if (node.getParent() != null && node.getParent() instanceof ModPackageTreeNode parent) {
+                            loadAttributePanel(node, parent.getModName(), parent.getVersion());
+                        }
+                    } else
                         removeAttributePanel();
-                    }
                 }
-            };
+            }
+        };
     }
 
-    private void loadAttributePanel(BaseFile file) {
-        JPanel panel = filePanelManager.getPanel(file.getClass());
+    private void loadAttributePanel(ModPackageTreeNode modPackageTreeNode, String modName, String version) {
+        JPanel panel = filePanelManager.getPanel(modPackageTreeNode.getBaseFile().getClass());
         if (panel != null) {
             addJPanelToDefaultDetailPanel(panel);
-            eventSystem.fireEvent(new FillItemListEvent(controller.getItemList()));
-        }
-        else
+
+            eventSystem.fireEvent(new FillItemListEvent(
+                            FillItemEventModel.builder()
+                                    .scriptBlocks(
+                                            controller.getScriptBlocks(modName,
+                                                    version,
+                                                    modPackageTreeNode.getBaseFile().getFileName())
+                                    )
+                                    .fileName(modPackageTreeNode.getBaseFile().getFileName())
+                                    .modVersion(version)
+                                    .modName(modName)
+                                    .build()
+                    )
+            );
+        } else
             removeAttributePanel();
     }
 
@@ -174,8 +186,8 @@ public final class MainForm extends BaseFrame {
     }
 
     private void removeJPanelFromDefaultDetailPanel() {
-        for (Component component :defaultDetailPanel.getComponents()){
-            if (component instanceof JPanel panel){
+        for (Component component : defaultDetailPanel.getComponents()) {
+            if (component instanceof JPanel panel) {
                 panel.setEnabled(false);
                 defaultDetailPanel.removeAll();
                 break;
@@ -183,7 +195,7 @@ public final class MainForm extends BaseFrame {
         }
     }
 
-    private void removeAttributePanel(){
+    private void removeAttributePanel() {
         eventSystem.fireEvent(new EmptyItemListEvent());
         removeJPanelFromDefaultDetailPanel();
     }
@@ -208,7 +220,7 @@ public final class MainForm extends BaseFrame {
     private void updateLayout() {
         SwingUtilities.invokeLater(() -> {
             int rowCount = modTree.getRowCount();
-            int rowHeight = modTree.getRowHeight() > 0 ? modTree.getRowHeight() + 20: 20;
+            int rowHeight = modTree.getRowHeight() > 0 ? modTree.getRowHeight() + 20 : 20;
             modTree.setPreferredSize(new Dimension(modTree.getPreferredSize().width, rowCount * rowHeight));
             treeScrollPane.revalidate();
             treeScrollPane.repaint();

@@ -182,15 +182,19 @@
   "attributeList": [
     {
       "keyName": "ScriptBlockType",
+      "displayName": "Scriptblock Type:",
       "dataType": "scriptType",
       "description": "[ScriptType]",
-      "action": "Transform_Script_Type",
+      "action": "First_Required_Attribute",
+      "value": "item",
       "required": true
     },
     {
       "keyName": "ItemType",
       "dataType": "scriptBlockType",
+      "displayName": "Item Type:",
       "description": "[ScriptBlockType]",
+      "value": "",
       "condition": {
         "and": [
           {
@@ -206,6 +210,7 @@
     {
       "keyName": "alcoholPower",
       "dataType": "Float",
+      "displayName": "Alcohol Power:",
       "description": "[ScriptAlcoholPower]",
       "condition": {
         "and": [

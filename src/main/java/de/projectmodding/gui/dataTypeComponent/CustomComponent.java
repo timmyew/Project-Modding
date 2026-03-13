@@ -1,12 +1,11 @@
 package de.projectmodding.gui.dataTypeComponent;
-
 import de.projectmodding.core.model.AttributeModel;
 
-import javax.swing.*;
+public class CustomComponent extends AbstractComponentPanel implements IDataTypeComponent {
+    private AttributeModel attributeModel;
 
-public class CustomComponent extends JPanel implements IDataTypeComponent {
     @Override
-    public void setAttribute(AttributeModel attribute) {
+    protected void createUIComponents() {
 
     }
 

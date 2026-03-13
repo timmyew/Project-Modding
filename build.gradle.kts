@@ -10,12 +10,17 @@ repositories {
     mavenCentral()
 }
 
+tasks.named("compileJava").configure {
+    outputs.upToDateWhen { false }
+}
+
 dependencies {
     compileOnly("org.projectlombok:lombok:1.18.42")
     annotationProcessor("org.projectlombok:lombok:1.18.42")
 
     implementation("org.json:json:20251224")
-    implementation("com.formdev:flatlaf:3.6.2")
+    implementation("com.formdev:flatlaf:3.7.1")
+    implementation("com.formdev:flatlaf-extras:3.7.1")
     implementation("com.jetbrains.intellij.java:java-gui-forms-rt:+")
     implementation("com.jgoodies:forms:1.1-preview")
 

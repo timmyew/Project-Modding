@@ -19,6 +19,7 @@ public class AttributeModel{
     DataType dataType;
     DataType subType;
     String customType;
+    String displayName;
     String delimiter;
     String description;
     String value;

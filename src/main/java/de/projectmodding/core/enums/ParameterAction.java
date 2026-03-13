@@ -3,7 +3,7 @@ package de.projectmodding.core.enums;
 public enum ParameterAction {
     Transform_Name("Transform_Name"),
     Transform_Version("Transform_Version"),
-    Transform_Script_Type("Transform_Script_Type");
+    First_Required_Attribute("First_Required_Attribute");
 
     private final String value;
 

@@ -1,18 +1,20 @@
 package de.projectmodding.core.component.event.event;
 
 import de.projectmodding.core.component.event.Event;
+import de.projectmodding.core.model.event.FillItemEventModel;
+import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 
 import java.util.List;
 
-public class FillItemListEvent implements Event<List<String>> {
+public class FillItemListEvent implements Event<FillItemEventModel> {
 
-    private final List<String> listData;
-    public FillItemListEvent(List<String> list) {
-        listData = list;
+    private final FillItemEventModel fillItemEventModel;
+    public FillItemListEvent(FillItemEventModel list) {
+        fillItemEventModel = list;
     }
 
     @Override
-    public List<String> getData() {
-        return listData;
+    public FillItemEventModel getData() {
+        return fillItemEventModel;
     }
 }

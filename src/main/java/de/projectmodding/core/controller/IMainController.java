@@ -3,6 +3,7 @@ package de.projectmodding.core.controller;
 import de.projectmodding.core.enums.ModDataKey;
 import de.projectmodding.core.model.mod.ModPackageModel;
 import de.projectmodding.core.model.mod.files.BaseFile;
+import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 
 import javax.swing.tree.DefaultTreeModel;
 import java.util.List;
@@ -16,5 +17,5 @@ public interface IMainController {
 
     BaseFile generateModData(String version, String modName, ModDataKey key);
 
-    List<String> getItemList();
+    List<ScriptBlock> getScriptBlocks(String modName, String modVersion, String fileName);
 }

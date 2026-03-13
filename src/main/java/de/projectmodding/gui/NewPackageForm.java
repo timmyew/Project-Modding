@@ -8,6 +8,7 @@ import de.projectmodding.core.component.factory.DialogFactory;
 import de.projectmodding.core.component.validator.NewModFormValidator;
 import de.projectmodding.core.controller.INewPackageController;
 import de.projectmodding.core.model.mod.ModPackageModel;
+import de.projectmodding.gui.constant.FlatLafIcons;
 import lombok.Setter;
 
 import javax.swing.*;
@@ -41,6 +42,8 @@ public final class NewPackageForm extends BaseFrame {
 
     void initListeners(){
         assert locationButton != null;
+        locationButton.setIcon(FlatLafIcons.FILE_CHOOSER_ICON);
+        locationButton.setText("");
         locationButton.addActionListener(action -> {
             locationTextField.setText(controller.chooseLocation());
         });

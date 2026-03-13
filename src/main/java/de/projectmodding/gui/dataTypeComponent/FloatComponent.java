@@ -4,14 +4,15 @@ import de.projectmodding.core.model.AttributeModel;
 
 import javax.swing.*;
 
-public class FloatComponent extends JPanel implements IDataTypeComponent {
-    @Override
-    public void setAttribute(AttributeModel attribute) {
-
-    }
+public class FloatComponent extends AbstractComponentPanel implements IDataTypeComponent {
 
     @Override
     public Boolean isDataValid() {
         return null;
+    }
+
+    @Override
+    protected void createUIComponents() {
+
     }
 }

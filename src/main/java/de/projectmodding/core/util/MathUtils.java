@@ -6,4 +6,13 @@ public class MathUtils {
     public static Integer getPercentValue(Integer baseValue, Integer percentage){
         return (baseValue / 100) * percentage;
     }
+
+    public static int tryParseInt(String string, int defaultValue) {
+        try {
+            return Integer.parseInt(string);
+        }
+        catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
 }
