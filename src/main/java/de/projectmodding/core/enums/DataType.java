@@ -7,7 +7,8 @@ public enum DataType {
     Float("Float"),
     Boolean("Boolean"),
     File("File"),
-    Custom("Custom");
+    Custom("Custom"),
+    Attribute("Attribute");
 
     private final String value;
 

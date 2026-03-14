@@ -87,6 +87,7 @@ public final class DefinitionLoader {
             AtomicReference<String> filePath = new AtomicReference<>("");
             JSONObject json = loadJson(path);
             final AtomicReference<String> atomicPath = new AtomicReference<>(path);
+            ArrayList<FileDefinitionModel.CustomTypeMappings> customTypeMapping = new ArrayList<>();
 
             json.names().forEach(key -> {
                 Object object = json.get(key.toString());
@@ -111,6 +112,10 @@ public final class DefinitionLoader {
                         );
 
                     filePath.set(object.toString());
+                } else if (key.equals(AttributeConstants.CUSTOM_TYPE_MAPPINGS)) {
+                    json.getJSONArray(key.toString()).forEach(obj -> {
+                        customTypeMapping.add(JSONObject.fromJson(obj.toString(), FileDefinitionModel.CustomTypeMappings.class));
+                    });
                 } else if (object instanceof JSONArray) {
                     ArrayList<String> list = new ArrayList<>();
                     dataTypes.get().put(key.toString(), list);
@@ -121,9 +126,10 @@ public final class DefinitionLoader {
             });
 
             FileDefinitionModel result = FileDefinitionModel.builder()
-                    .customDatatypeMap(dataTypes.get())
+                    .customDataTypeMap(dataTypes.get())
                     .attributes(attributeModels.get())
                     .filePath(filePath.get())
+                    .customTypeMappings(customTypeMapping)
                     .build();
 
             DefinitionDetailModelValidator.validate(result);

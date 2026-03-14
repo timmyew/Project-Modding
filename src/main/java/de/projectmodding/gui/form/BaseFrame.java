@@ -1,4 +1,4 @@
-package de.projectmodding.gui;
+package de.projectmodding.gui.form;
 
 import de.projectmodding.core.component.event.Listener;
 import de.projectmodding.core.component.event.system.EventSystem;

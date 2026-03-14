@@ -45,7 +45,7 @@
       "dataType": "String",
       "description": "[WorkshopVersion]",
       "value": "1.0.0",
-      "require": true,
+      "required": true,
       "action": "Transform_Version"
     },
     {
@@ -59,7 +59,7 @@
       "description": "[WorkshopTitle]",
       "value": "New Package",
       "action": "Transform_Name",
-      "require": true
+      "required": true
     },
     {
       "keyName": "description",
@@ -78,7 +78,7 @@
       "dataType": "visibility",
       "description": "[WorkshopVisibility]",
       "value": "public=0",
-      "require": true
+      "required": true
     }
   ]
 }

@@ -6,15 +6,10 @@ import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 
 import java.util.List;
 
-public class FillItemListEvent implements Event<FillItemEventModel> {
+public class FillItemListEvent extends AbstractEvent<FillItemEventModel> {
 
-    private final FillItemEventModel fillItemEventModel;
-    public FillItemListEvent(FillItemEventModel list) {
-        fillItemEventModel = list;
-    }
 
-    @Override
-    public FillItemEventModel getData() {
-        return fillItemEventModel;
+    public FillItemListEvent(FillItemEventModel dataModel) {
+        super(dataModel);
     }
 }

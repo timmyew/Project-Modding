@@ -1,15 +1,17 @@
-package de.projectmodding.gui.panel;
+package de.projectmodding.gui.panel.script;
 
 import de.projectmodding.core.component.event.Event;
-import de.projectmodding.core.component.event.Listener;
 import de.projectmodding.core.component.event.event.EmptyItemListEvent;
 import de.projectmodding.core.component.event.event.FillItemListEvent;
+import de.projectmodding.core.component.event.event.LoadAttributesEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
 import de.projectmodding.core.controller.IScriptPanelController;
+import de.projectmodding.core.model.event.LoadAttributesEventModel;
 import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 import de.projectmodding.core.util.MathUtils;
 import de.projectmodding.gui.constant.FlatLafIcons;
 import de.projectmodding.gui.manager.DatatypeComponentManager;
+import de.projectmodding.gui.panel.AbstractBasePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +19,12 @@ import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ScriptPanel extends JPanel implements Listener {
+public class ScriptPanel extends AbstractBasePanel {
     private JList<ScriptBlock> scriptBlockList;
-    private final EventSystem eventSystem;
     private final DatatypeComponentManager componentManager;
     private final ScriptPanelHeader scriptPanelHeader = new ScriptPanelHeader();
-    private final JPanel requiredAttributePanel = new JPanel();
-    private final JPanel customAttributePanel = new JPanel();
+    private final ScriptPanelRequiredAttributes scriptPanelRequiredAttribute;
+    private final ScriptPanelAttributes scriptPanelAttributes;
     private final IScriptPanelController controller;
     private JPanel attributePanel = null;
 
@@ -33,9 +34,11 @@ public class ScriptPanel extends JPanel implements Listener {
 
 
     public ScriptPanel(EventSystem eventSystem, DatatypeComponentManager componentManager, IScriptPanelController controller) {
-        super();
+        super(eventSystem);
+        this.scriptPanelRequiredAttribute = new ScriptPanelRequiredAttributes(getEventSystem());
+        this.scriptPanelAttributes = new ScriptPanelAttributes(getEventSystem());
+
         this.controller = controller;
-        this.eventSystem = eventSystem;
         this.componentManager = componentManager;
         createComponents();
     }
@@ -44,10 +47,10 @@ public class ScriptPanel extends JPanel implements Listener {
         setLayout(new GridBagLayout());
         createItemList();
         createAttributeScrollPane();
-        createListener();
     }
 
-    private void createListener() {
+    @Override
+    protected void createListener(EventSystem eventSystem) {
         eventSystem.registerEvent(FillItemListEvent.class, this);
         eventSystem.registerEvent(EmptyItemListEvent.class, this);
     }
@@ -78,7 +81,20 @@ public class ScriptPanel extends JPanel implements Listener {
         scriptBlockList = new JList<>();
         scriptBlockList.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                attributePanel.setVisible(scriptBlockList.getSelectedIndex() != -1);
+                int index = scriptBlockList.getSelectedIndex();
+
+                if (index != -1) {
+                    getEventSystem().fireEvent(new LoadAttributesEvent(
+                            LoadAttributesEventModel.builder()
+                                    .blockTypeItemTypeMap(controller.getScriptBlockTypes(currentModVersion))
+                                    .scriptBlock(scriptBlockList.getModel().getElementAt(index))
+                                    .build()
+                    ));
+                    attributePanel.setVisible(true);
+                }
+                else
+                    attributePanel.setVisible(false);
+
             }
         });
         JScrollPane scrollPane = new JScrollPane(scriptBlockList);
@@ -109,7 +125,7 @@ public class ScriptPanel extends JPanel implements Listener {
     }
 
     private JButton getRemoveButton() {
-        JButton removeButton = new JButton(FlatLafIcons.MINUS_ICON);
+        JButton removeButton = new JButton(FlatLafIcons.MINUS_ICON_X16);
         removeButton.addActionListener(e -> {
             int selectedIndex = scriptBlockList.getSelectedIndex();
             if (selectedIndex != -1) {
@@ -128,7 +144,7 @@ public class ScriptPanel extends JPanel implements Listener {
     }
 
     private JButton getAddButton() {
-        JButton addButton = new JButton(FlatLafIcons.PLUS_ICON);
+        JButton addButton = new JButton(FlatLafIcons.PLUS_ICON_X16);
         addButton.addActionListener(e -> {
             if (scriptBlockList.getModel() instanceof DefaultListModel<ScriptBlock> defaultModel) {
                 ScriptBlock newScriptBlock = controller.createScriptBlock(
@@ -183,8 +199,7 @@ public class ScriptPanel extends JPanel implements Listener {
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1.0;
         constraints.weighty = 0.5;
-        requiredAttributePanel.setBorder(BorderFactory.createEtchedBorder());
-        attributePanel.add(requiredAttributePanel, constraints);
+        attributePanel.add(scriptPanelRequiredAttribute, constraints);
 
         constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -193,8 +208,7 @@ public class ScriptPanel extends JPanel implements Listener {
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 1.0;
         constraints.weighty = 0.5;
-        customAttributePanel.setBorder(BorderFactory.createEtchedBorder());
-        attributePanel.add(customAttributePanel, constraints);
+        attributePanel.add(scriptPanelAttributes, constraints);
         attributePanel.setVisible(false);
         return attributePanel;
     }

@@ -6,10 +6,10 @@ import de.projectmodding.core.model.mod.ModPackageModel;
 import de.projectmodding.core.model.mod.files.BaseFile;
 import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 import de.projectmodding.core.service.DefinitionService;
-import de.projectmodding.core.service.ModGenerationService;
+import de.projectmodding.core.service.ModDataGenerationService;
 import de.projectmodding.core.service.RuntimeDataService;
 import de.projectmodding.core.service.TreeGeneratorService;
-import de.projectmodding.gui.MainForm;
+import de.projectmodding.gui.form.MainForm;
 
 import javax.swing.tree.DefaultTreeModel;
 import java.util.List;
@@ -19,15 +19,15 @@ public class MainController implements IMainController {
     private final RuntimeDataService runtimeDataService;
     private final DefinitionService definitionService;
     private final TreeGeneratorService treeGeneratorService;
-    private final ModGenerationService modGenerationService;
+    private final ModDataGenerationService modDataGenerationService;
 
     public MainController(MainForm view, RuntimeDataService runtimeDataService, DefinitionService definitionService,
-                          TreeGeneratorService treeGeneratorService, ModGenerationService modGenerationService) {
+                          TreeGeneratorService treeGeneratorService, ModDataGenerationService modDataGenerationService) {
         this.view = view;
         this.runtimeDataService = runtimeDataService;
         this.definitionService = definitionService;
         this.treeGeneratorService = treeGeneratorService;
-        this.modGenerationService = modGenerationService;
+        this.modDataGenerationService = modDataGenerationService;
     }
 
     @Override
@@ -49,11 +49,11 @@ public class MainController implements IMainController {
     @Override
     public BaseFile generateModData(String version, String modName, ModDataKey key) {
         ModPackageModel modPackageModel = runtimeDataService.getByType(ModPackageModel.class);
-        return modGenerationService.createFile(modPackageModel, modName, key, version);
+        return modDataGenerationService.createFile(modPackageModel, modName, key, version);
     }
 
     @Override
     public List<ScriptBlock> getScriptBlocks(String modName, String modVersion, String fileName) {
-        return modGenerationService.searchAndGetScriptBlocks(modName, modVersion, fileName);
+        return modDataGenerationService.searchAndGetScriptBlocks(modName, modVersion, fileName);
     }
 }

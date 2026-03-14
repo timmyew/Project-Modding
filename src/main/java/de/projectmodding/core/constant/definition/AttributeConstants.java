@@ -12,6 +12,13 @@ public final class AttributeConstants {
     public static  final String DESCRIPTION = "description";
     public static  final String CUSTOM_TYPE = "customType";
     public static final String ACTION = "action";
+    public static final String CONDITION = "condition";
+    public static final String AND = "and";
+    public static final String OR = "or";
+    public static final String HAS = "has";
+    public static final String MIN = "min";
+    public static final String MAX = "max";
+    public static final String CUSTOM_TYPE_MAPPINGS = "customTypeMappings";
 
     public static final String GLOBAL_DELIMITER = ";";
 }

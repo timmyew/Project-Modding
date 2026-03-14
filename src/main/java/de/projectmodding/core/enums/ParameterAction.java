@@ -1,9 +1,9 @@
 package de.projectmodding.core.enums;
 
 public enum ParameterAction {
+    Load_Script_Block_Types("Load_Script_Block_Types"),
     Transform_Name("Transform_Name"),
-    Transform_Version("Transform_Version"),
-    First_Required_Attribute("First_Required_Attribute");
+    Transform_Version("Transform_Version");
 
     private final String value;
 

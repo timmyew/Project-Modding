@@ -45,7 +45,6 @@ public final class TreeGeneratorService {
 
     private void addModVersions(ModPackageTreeNode root, HashMap<String, ModData> modVersionMap, String modName){
         AtomicReference<ModPackageTreeNode> atomicRoot  = new AtomicReference<>(root);
-        AtomicReference<String> atomicModName = new AtomicReference<>(modName);
 
         modVersionMap.forEach((version, value) -> {
             ModPackageTreeNode modVersion = new ModPackageTreeNode(version);

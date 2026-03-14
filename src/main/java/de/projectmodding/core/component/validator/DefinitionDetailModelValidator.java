@@ -9,11 +9,17 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public final class DefinitionDetailModelValidator {
+    private static final String DOT_DELIMITER = java.util.regex.Pattern.quote(".");
     private DefinitionDetailModelValidator() {
     }
 
     public static void validate(FileDefinitionModel detailModel) {
-        AtomicReference<HashMap<String, List<String>>> atomicCustomDataTypes = new AtomicReference<>(detailModel.getCustomDatatypeMap());
+        validateCustomDataTypeMap(detailModel);
+        validateCustomTypeMappings(detailModel);
+    }
+
+    private static void validateCustomDataTypeMap(FileDefinitionModel detailModel) {
+        AtomicReference<HashMap<String, List<String>>> atomicCustomDataTypes = new AtomicReference<>(detailModel.getCustomDataTypeMap());
 
         detailModel.getAttributes().forEach(attribute -> {
             if (attribute.getDataType().equals(DataType.Custom) && !atomicCustomDataTypes.get().containsKey(attribute.getCustomType())) {
@@ -27,5 +33,28 @@ public final class DefinitionDetailModelValidator {
                 );
             }
         });
+    }
+
+    private static void validateCustomTypeMappings(FileDefinitionModel detailModel) {
+        detailModel.getCustomTypeMappings().forEach(mapper -> {
+            String[] pairOrOne = mapper.getParent().split(DOT_DELIMITER);
+
+            if (pairOrOne.length == 1) {
+                String typeName = pairOrOne[0];
+            }
+            else if (pairOrOne.length == 2) {
+                String typeName = pairOrOne[0];
+                String typeElement = pairOrOne[1];
+            }
+        });
+    }
+
+    private void validateStringValue(String value){
+        if (value == null){
+
+        }
+        else if (value.isBlank()){
+
+        }
     }
 }

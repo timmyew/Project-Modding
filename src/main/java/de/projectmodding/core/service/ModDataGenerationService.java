@@ -4,7 +4,9 @@ import de.projectmodding.core.component.factory.file.*;
 import de.projectmodding.core.component.factory.file.scriptblock.ScriptBlockFactory;
 import de.projectmodding.core.constant.mod.ModFolderConstants;
 import de.projectmodding.core.enums.ModDataKey;
+import de.projectmodding.core.enums.ParameterAction;
 import de.projectmodding.core.exception.ModGenerationServiceException;
+import de.projectmodding.core.model.AttributeModel;
 import de.projectmodding.core.model.definition.DefinitionVersionMap;
 import de.projectmodding.core.model.definition.ModDefinitionModel;
 import de.projectmodding.core.model.mod.ModData;
@@ -13,16 +15,17 @@ import de.projectmodding.core.model.mod.files.*;
 import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 import de.projectmodding.core.util.MathUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
-public final class ModGenerationService {
+public final class ModDataGenerationService {
     private final HashMap<ModDataKey, IFactory<? extends BaseFile>> fileFactoryMap = new HashMap<>();
     private final RuntimeDataService runtimeDataService;
 
-    public ModGenerationService(RuntimeDataService runtimeDataService) {
+    public ModDataGenerationService(RuntimeDataService runtimeDataService) {
         this.runtimeDataService = runtimeDataService;
         init();
     }
@@ -134,6 +137,28 @@ public final class ModGenerationService {
         iterateScriptBlock(modName, version, scriptModel -> _createScriptBlock(fileName, scriptModel, scriptBlock.get()));
         return scriptBlock.get();
     }
+
+    public HashMap<String, List<String>> loadScriptBlockTypes(String version){
+        ModDefinitionModel modDefinition = runtimeDataService.getByType(DefinitionVersionMap.class).getMap().get(version);
+        HashMap<String, List<String>> scriptBlockTypesMap = new HashMap<>();
+
+        modDefinition.getScript().getCustomTypeMappings().forEach(mapper -> {
+            String parent = mapper.getParent();
+            String child = mapper.getChild();
+
+            if (scriptBlockTypesMap.containsKey(parent)) {
+                scriptBlockTypesMap.get(parent).add(child);
+            }
+            else {
+                ArrayList<String> list = new ArrayList<>();
+                list.add(child);
+                scriptBlockTypesMap.put(parent, list);
+            }
+        });
+
+        return scriptBlockTypesMap;
+    }
+
 
     private void _createScriptBlock(String fileName, ScriptModel scriptModel, ScriptBlock scriptBlock) {
         if (fileName.equals(scriptModel.getFileName())) {

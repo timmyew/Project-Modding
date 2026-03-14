@@ -1,7 +1,6 @@
-package de.projectmodding.gui;
+package de.projectmodding.gui.form;
 
 import de.projectmodding.core.component.event.Event;
-import de.projectmodding.core.component.event.event.FillItemListEvent;
 import de.projectmodding.core.component.event.event.ModCreationEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
 import de.projectmodding.core.component.factory.DialogFactory;

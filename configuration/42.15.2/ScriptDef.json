@@ -179,22 +179,38 @@
     "character_trait_definition",
     "character_profession_definition"
   ],
-  "attributeList": [
+  "customTypeMappings": [
     {
-      "keyName": "ScriptBlockType",
-      "displayName": "Scriptblock Type:",
-      "dataType": "scriptType",
-      "description": "[ScriptType]",
-      "action": "First_Required_Attribute",
-      "value": "item",
-      "required": true
-    },
+      "parent": "scriptType.item",
+      "child": "scriptBlockType"
+    }
+  ],
+  "attributeList": [
     {
       "keyName": "ItemType",
       "dataType": "scriptBlockType",
       "displayName": "Item Type:",
       "description": "[ScriptBlockType]",
       "value": "",
+      "action": "Load_Script_Block_Types",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item",
+              "scriptBlockType.All"
+            ]
+          }
+        ],
+        "or": []
+      },
+      "required": true
+    },
+    {
+      "keyName": "displayName",
+      "dataType": "File",
+      "displayName": "DisplayName:",
+      "description": "[ScriptDisplayName]",
       "condition": {
         "and": [
           {
@@ -204,8 +220,7 @@
             ]
           }
         ]
-      },
-      "required": true
+      }
     },
     {
       "keyName": "alcoholPower",

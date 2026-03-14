@@ -2,10 +2,7 @@ package de.projectmodding.core.model;
 
 import de.projectmodding.core.enums.DataType;
 import de.projectmodding.core.enums.ParameterAction;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,20 +20,27 @@ public class AttributeModel{
     String delimiter;
     String description;
     String value;
-    Boolean require;
+    Boolean required;
     ParameterAction action;
     Condition condition;
     Integer min;
     Integer max;
 
+    @NoArgsConstructor(force = true)
+    @AllArgsConstructor
+    @Value
     static public class Condition{
         ArrayList<And> and;
         ArrayList<Or> or;
 
+        @NoArgsConstructor(force = true)
+        @Value
         static public class And{
             List<String> has = new ArrayList<>();
         }
 
+        @NoArgsConstructor(force = true)
+        @Value
         static public class Or{
             List<String> has = new ArrayList<>();
         }

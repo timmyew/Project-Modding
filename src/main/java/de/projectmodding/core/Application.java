@@ -8,16 +8,15 @@ import de.projectmodding.core.controller.ScriptPanelController;
 import de.projectmodding.core.enums.DataType;
 import de.projectmodding.core.model.mod.files.ScriptModel;
 import de.projectmodding.core.service.DefinitionService;
-import de.projectmodding.core.service.ModGenerationService;
+import de.projectmodding.core.service.ModDataGenerationService;
 import de.projectmodding.core.service.RuntimeDataService;
 import de.projectmodding.core.service.TreeGeneratorService;
-import de.projectmodding.gui.MainForm;
+import de.projectmodding.gui.form.MainForm;
 import de.projectmodding.gui.dataTypeComponent.*;
 import de.projectmodding.gui.manager.DatatypeComponentManager;
 import de.projectmodding.gui.manager.FilePanelManager;
-import de.projectmodding.gui.panel.ScriptPanel;
+import de.projectmodding.gui.panel.script.ScriptPanel;
 
-import javax.swing.*;
 import java.util.Locale;
 
 public class Application {
@@ -42,7 +41,7 @@ public class Application {
         //Services
         TreeGeneratorService treeGeneratorService = new TreeGeneratorService();
         RuntimeDataService runtimeDataService = new RuntimeDataService();
-        ModGenerationService modGenerationService = new ModGenerationService(runtimeDataService);
+        ModDataGenerationService modDataGenerationService = new ModDataGenerationService(runtimeDataService);
         DefinitionService definitionService = new DefinitionService();
 
         //EventSystem
@@ -57,8 +56,9 @@ public class Application {
         datatypeComponentManager.registerComponent(DataType.Float, FloatComponent.class);
         datatypeComponentManager.registerComponent(DataType.Integer, IntegerComponent.class);
         datatypeComponentManager.registerComponent(DataType.File, FileComponent.class);
+        datatypeComponentManager.registerComponent(DataType.Attribute, AttributeChoiceComponent.class);
 
-        ScriptPanelController scriptPanelController = new ScriptPanelController(runtimeDataService, modGenerationService);
+        ScriptPanelController scriptPanelController = new ScriptPanelController(runtimeDataService, modDataGenerationService);
 
         //GUI Panel Manager
         FilePanelManager filePanelManager = new FilePanelManager();
@@ -68,8 +68,8 @@ public class Application {
         mainForm = new MainForm(eventSystem, filePanelManager);
 
         //Controller
-        MainController mainController = new MainController(mainForm, runtimeDataService, definitionService, treeGeneratorService, modGenerationService);
-        NewPackageController newPackageController = new NewPackageController(mainForm.getNewPackageForm(), runtimeDataService, modGenerationService);
+        MainController mainController = new MainController(mainForm, runtimeDataService, definitionService, treeGeneratorService, modDataGenerationService);
+        NewPackageController newPackageController = new NewPackageController(mainForm.getNewPackageForm(), runtimeDataService, modDataGenerationService);
 
         mainForm.setController(mainController);
         mainForm.getNewPackageForm().setController(newPackageController);

@@ -22,7 +22,7 @@ public final class WorkshopFactory {
         final AtomicReference<String> atomicPackageVersion = new AtomicReference<>(packageVersion);
 
         modDefinitionModel.getWorkShop().getAttributes().forEach(attribute -> {
-            if (attribute.getRequire() != null && attribute.getRequire()) {
+            if (attribute.getRequired() != null && attribute.getRequired()) {
                 AttributeModel newAttributeModel = attribute.toBuilder().build();
                 atomicWorkshopAttributes.get().add(newAttributeModel);
 

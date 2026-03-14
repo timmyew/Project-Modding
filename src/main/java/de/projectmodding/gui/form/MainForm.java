@@ -1,4 +1,4 @@
-package de.projectmodding.gui;
+package de.projectmodding.gui.form;
 
 import de.projectmodding.core.component.event.Event;
 import de.projectmodding.core.component.event.event.EmptyItemListEvent;
@@ -10,7 +10,6 @@ import de.projectmodding.core.controller.IMainController;
 import de.projectmodding.core.model.definition.DefinitionVersionMap;
 import de.projectmodding.core.model.event.FillItemEventModel;
 import de.projectmodding.core.model.mod.ModPackageModel;
-import de.projectmodding.core.model.mod.files.BaseFile;
 import de.projectmodding.gui.manager.FilePanelManager;
 import de.projectmodding.gui.popup.TreeJPopupMenu;
 import de.projectmodding.gui.tree.node.ModPackageTreeNode;
