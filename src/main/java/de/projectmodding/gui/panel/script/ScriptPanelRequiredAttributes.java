@@ -26,7 +26,7 @@ public class ScriptPanelRequiredAttributes extends AbstractBasePanel {
     public <T> void onEvent(Event<T> event) {
         this.removeAll();
         if (event instanceof LoadAttributesEvent loadEvent) {
-            ScriptPanelAttributeGenerator.generateRequired(this, loadEvent.getData().getDefinitionModel(), loadEvent.getData().getScriptBlock(), loadEvent.getData().getComponentManager());
+            ScriptPanelAttributeGenerator.getInstance().generateRequired(this, loadEvent.getData().getDefinitionModel(), loadEvent.getData().getScriptBlock(), loadEvent.getData().getComponentManager());
         }
     }
 

@@ -186,7 +186,7 @@
   ],
   "attributeList": [
     {
-      "keyName": "ScriptType",
+      "keyName": "ScriptTypeField",
       "dataType": "scriptType",
       "displayName": "Script Type:",
       "description": "[ScriptType]",
@@ -201,16 +201,6 @@
       "description": "[ScriptBlockType]",
       "value": "",
       "action": "Load_Script_Block_Types",
-      "condition": {
-        "and": [
-          {
-            "has": [
-              "scriptType.item",
-              "scriptBlockType.Normal"
-            ]
-          }
-        ]
-      },
       "required": true
     },
     {

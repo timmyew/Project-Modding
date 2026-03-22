@@ -13,7 +13,6 @@ public class StringComponent extends AbstractComponentPanel implements IDataType
         JPanel dataPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
         add(dataPanel, BorderLayout.CENTER);
 
-        label = getDisplayNameLabel();
         dataPanel.add(label);
         dataPanel.add(textField);
     }
