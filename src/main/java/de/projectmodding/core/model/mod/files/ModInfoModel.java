@@ -1,5 +1,6 @@
 package de.projectmodding.core.model.mod.files;
 
+import de.projectmodding.core.enums.ModDataEnum;
 import de.projectmodding.core.model.AttributeModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,4 +13,9 @@ import java.util.List;
 @SuperBuilder()
 public class ModInfoModel extends BaseFile{
     List<AttributeModel> attributes;
+
+    @Override
+    public ModDataEnum getFileType() {
+        return ModDataEnum.MOD_INFO;
+    }
 }

@@ -163,6 +163,7 @@ public final class MainForm extends BaseFrame {
                                     )
                                     .fileName(modPackageTreeNode.getBaseFile().getFileName())
                                     .modVersion(version)
+                                    .moduleName(modPackageTreeNode.getBaseFile().getModuleName())
                                     .modName(modName)
                                     .build()
                     )

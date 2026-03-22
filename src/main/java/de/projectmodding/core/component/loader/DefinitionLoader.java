@@ -102,6 +102,9 @@ public final class DefinitionLoader {
 
                         AttributeModel attributeModel = JSONObject.fromJson(jsonObject.toString(), AttributeModel.class);
 
+                        if (attributeModel.getRequired() == null)
+                            attributeModel.setRequired(false);
+
                         attributeModels.get().add(attributeModel);
                         contextBuilder.get().append(String.format("Attribute '%s' Validated!\n", attributeModel.getKeyName()));
                     });

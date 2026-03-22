@@ -1,5 +1,6 @@
 package de.projectmodding.core.model.mod.files;
 
+import de.projectmodding.core.enums.ModDataEnum;
 import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +12,10 @@ import java.util.List;
 @Data
 @SuperBuilder()
 public class ScriptModel extends BaseFile{
-    String moduleName;
     List<ScriptBlock> items;
+
+    @Override
+    public ModDataEnum getFileType() {
+        return ModDataEnum.SCRIPT;
+    }
 }

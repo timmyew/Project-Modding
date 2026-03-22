@@ -9,15 +9,13 @@ import java.awt.*;
 
 public abstract class AbstractComponentPanel extends JPanel implements IDataTypeComponent {
     protected AttributeModel attribute;
-    private JButton removeButton = new JButton(FlatLafIcons.CLOSE_ICON_X24);
-    private JButton questionButton = new JButton(FlatLafIcons.QUESTION_ICON_X24);
+    private final JButton removeButton = new JButton(FlatLafIcons.CLOSE_ICON_X24);
+    private final JButton questionButton = new JButton(FlatLafIcons.QUESTION_ICON_X24);
 
     private boolean isUICreated = false;
-    private boolean isRequired = false;
 
-    public void setAttribute(AttributeModel attributeModel, boolean isRequired){
+    public void setAttribute(AttributeModel attributeModel){
         this.attribute = attributeModel;
-        this.isRequired = isRequired;
 
         if (!isUICreated){
             setLayout(new BorderLayout(5, 5));

@@ -1,5 +1,6 @@
 package de.projectmodding.core.model.definition;
 
+import de.projectmodding.core.enums.ModDataEnum;
 import de.projectmodding.core.model.AttributeModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

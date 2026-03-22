@@ -1,6 +1,6 @@
 package de.projectmodding.core.service;
 
-import de.projectmodding.core.constant.mod.ModFolderConstants;
+import de.projectmodding.core.enums.ModDataEnum;
 import de.projectmodding.core.enums.ModDataKey;
 import de.projectmodding.core.model.mod.ModData;
 import de.projectmodding.core.model.mod.ModPackageModel;
@@ -31,7 +31,7 @@ public final class TreeGeneratorService {
     }
 
     private void addMods(ModPackageTreeNode root, ModPackageModel modPackage){
-        AtomicReference<ModPackageTreeNode> atomicModFolder = new AtomicReference<>(new ModPackageTreeNode(ModFolderConstants.MOD_FOLDER));
+        AtomicReference<ModPackageTreeNode> atomicModFolder = new AtomicReference<>(new ModPackageTreeNode(ModDataEnum.MOD.getValue()));
 
         modPackage.getModList().forEach(modModel -> {
             ModPackageTreeNode modNode = new ModPackageTreeNode(modModel.getModName());
@@ -54,8 +54,8 @@ public final class TreeGeneratorService {
     }
 
     private void addCommon(ModPackageTreeNode root, ModData modData, String modName){
-        ModPackageTreeNode commonFolder = new ModPackageTreeNode(ModFolderConstants.COMMON_FOLDER);
-        addModData(commonFolder, modData, ModFolderConstants.COMMON_FOLDER, modName);
+        ModPackageTreeNode commonFolder = new ModPackageTreeNode(ModDataEnum.COMMON.getValue());
+        addModData(commonFolder, modData, ModDataEnum.COMMON.getValue(), modName);
         root.add(commonFolder);
     }
 
@@ -72,42 +72,42 @@ public final class TreeGeneratorService {
     }
 
     private void addAnimationModels(ModPackageTreeNode root, List<AnimationModel> animations, String version, String modName){
-        ModPackageTreeNode animationFolder = new ModPackageTreeNode(ModFolderConstants.ANIMATION_FOLDER, ModDataKey.Animation, version, modName);
+        ModPackageTreeNode animationFolder = new ModPackageTreeNode(ModDataEnum.ANIMATION.getValue(), ModDataKey.Animation, version, modName);
         addBaseFiles(animationFolder, animations);
         root.add(animationFolder);
     }
     private void addModelXs(ModPackageTreeNode root, List<Model_X_Model> modelXModels, String version, String modName){
-        ModPackageTreeNode modelXFolder = new ModPackageTreeNode(ModFolderConstants.MODEL_X_FOLDER, ModDataKey.Model_X, version, modName);
+        ModPackageTreeNode modelXFolder = new ModPackageTreeNode(ModDataEnum.MODEL_X.getValue(), ModDataKey.Model_X, version, modName);
         addBaseFiles(modelXFolder, modelXModels);
         root.add(modelXFolder);
     }
     private void addScripts(ModPackageTreeNode root, List<ScriptModel> scripts, String version, String modName){
-        ModPackageTreeNode scriptFolder = new ModPackageTreeNode(ModFolderConstants.SCRIPT_FOLDER, ModDataKey.Script, version, modName);
+        ModPackageTreeNode scriptFolder = new ModPackageTreeNode(ModDataEnum.SCRIPT.getValue(), ModDataKey.Script, version, modName);
         root.add(scriptFolder);
         addBaseFiles(scriptFolder, scripts);
     }
     private void addLuaModels(ModPackageTreeNode root, List<LuaModel> luaModels, String version, String modName){
-        ModPackageTreeNode luaFolder = new ModPackageTreeNode(ModFolderConstants.LUA_FOLDER, ModDataKey.Lua, version, modName);
+        ModPackageTreeNode luaFolder = new ModPackageTreeNode(ModDataEnum.LUA.getValue(), ModDataKey.Lua, version, modName);
         addBaseFiles(luaFolder, luaModels);
         root.add(luaFolder);
     }
     private void addSandBoxModels(ModPackageTreeNode root, List<SandboxModel> sandboxes, String version, String modName){
-        ModPackageTreeNode sandboxFolder = new ModPackageTreeNode(ModFolderConstants.SANDBOX_FOLDER, ModDataKey.Sandbox, version, modName);
+        ModPackageTreeNode sandboxFolder = new ModPackageTreeNode(ModDataEnum.SANDBOX.getValue(), ModDataKey.Sandbox, version, modName);
         addBaseFiles(sandboxFolder, sandboxes);
         root.add(sandboxFolder);
     }
     private void addSoundModels(ModPackageTreeNode root, List<SoundModel> soundModels, String version, String modName){
-        ModPackageTreeNode soundFolder = new ModPackageTreeNode(ModFolderConstants.SOUND_FOLDER, ModDataKey.Sound, version, modName);
+        ModPackageTreeNode soundFolder = new ModPackageTreeNode(ModDataEnum.SOUND.getValue(), ModDataKey.Sound, version, modName);
         addBaseFiles(soundFolder, soundModels);
         root.add(soundFolder);
     }
     private void addTextureModels(ModPackageTreeNode root, List<TextureModel> textures, String version, String modName){
-        ModPackageTreeNode textureFolder = new ModPackageTreeNode(ModFolderConstants.TEXTURE_FOLDER, ModDataKey.Texture, version, modName);
+        ModPackageTreeNode textureFolder = new ModPackageTreeNode(ModDataEnum.TEXTURE.getValue(), ModDataKey.Texture, version, modName);
         addBaseFiles(textureFolder, textures);
         root.add(textureFolder);
     }
     private void addTranslationModels(ModPackageTreeNode root, List<TranslationModel> translations, String version, String modName){
-        ModPackageTreeNode translationFolder = new ModPackageTreeNode(ModFolderConstants.TRANSLATION_FOLDER, ModDataKey.Translation, version, modName);
+        ModPackageTreeNode translationFolder = new ModPackageTreeNode(ModDataEnum.TRANSLATION.getValue(), ModDataKey.Translation, version, modName);
         addBaseFiles(translationFolder, translations);
         root.add(translationFolder);
     }

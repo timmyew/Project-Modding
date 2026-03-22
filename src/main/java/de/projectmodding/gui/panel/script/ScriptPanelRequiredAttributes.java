@@ -1,7 +1,9 @@
 package de.projectmodding.gui.panel.script;
 
 import de.projectmodding.core.component.event.Event;
+import de.projectmodding.core.component.event.event.LoadAttributesEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
+import de.projectmodding.gui.generator.ScriptPanelAttributeGenerator;
 import de.projectmodding.gui.panel.AbstractBasePanel;
 
 import javax.swing.*;
@@ -22,11 +24,14 @@ public class ScriptPanelRequiredAttributes extends AbstractBasePanel {
 
     @Override
     public <T> void onEvent(Event<T> event) {
-
+        this.removeAll();
+        if (event instanceof LoadAttributesEvent loadEvent) {
+            ScriptPanelAttributeGenerator.generateRequired(this, loadEvent.getData().getDefinitionModel(), loadEvent.getData().getScriptBlock(), loadEvent.getData().getComponentManager());
+        }
     }
 
     @Override
     protected void createListener(EventSystem eventSystem) {
-
+        eventSystem.registerEvent(LoadAttributesEvent.class, this);
     }
 }

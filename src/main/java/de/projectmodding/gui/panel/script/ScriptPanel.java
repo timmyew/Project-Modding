@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 public class ScriptPanel extends AbstractBasePanel {
     private JList<ScriptBlock> scriptBlockList;
     private final DatatypeComponentManager componentManager;
-    private final ScriptPanelHeader scriptPanelHeader = new ScriptPanelHeader();
+    private final ScriptPanelHeader scriptPanelHeader;
     private final ScriptPanelRequiredAttributes scriptPanelRequiredAttribute;
     private final ScriptPanelAttributes scriptPanelAttributes;
     private final IScriptPanelController controller;
@@ -31,10 +31,12 @@ public class ScriptPanel extends AbstractBasePanel {
     private String currentModVersion = "";
     private String currentModName = "";
     private String currentModFileName = "";
+    private String currentModuleName = "";
 
 
     public ScriptPanel(EventSystem eventSystem, DatatypeComponentManager componentManager, IScriptPanelController controller) {
         super(eventSystem);
+        this.scriptPanelHeader = new ScriptPanelHeader(eventSystem);
         this.scriptPanelRequiredAttribute = new ScriptPanelRequiredAttributes(getEventSystem());
         this.scriptPanelAttributes = new ScriptPanelAttributes(getEventSystem());
 
@@ -84,10 +86,14 @@ public class ScriptPanel extends AbstractBasePanel {
                 int index = scriptBlockList.getSelectedIndex();
 
                 if (index != -1) {
+                    ScriptBlock block = scriptBlockList.getModel().getElementAt(index);
                     getEventSystem().fireEvent(new LoadAttributesEvent(
                             LoadAttributesEventModel.builder()
                                     .blockTypeItemTypeMap(controller.getScriptBlockTypes(currentModVersion))
-                                    .scriptBlock(scriptBlockList.getModel().getElementAt(index))
+                                    .scriptBlock(block)
+                                    .moduleName(currentModuleName)
+                                    .definitionModel(controller.getScriptDefinition(currentModVersion))
+                                    .componentManager(componentManager)
                                     .build()
                     ));
                     attributePanel.setVisible(true);
@@ -239,6 +245,7 @@ public class ScriptPanel extends AbstractBasePanel {
                 currentModVersion = fillItemEvent.getData().getModVersion();
                 currentModName = fillItemEvent.getData().getModName();
                 currentModFileName = fillItemEvent.getData().getFileName();
+                currentModuleName = fillItemEvent.getData().getModuleName();
                 model.addAll(scriptBlocks);
 
                 scriptBlockList.setModel(model);

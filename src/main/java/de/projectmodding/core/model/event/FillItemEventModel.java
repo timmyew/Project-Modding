@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 public class FillItemEventModel {
     List<ScriptBlock> scriptBlocks;
+    String moduleName;
     String modName;
     String modVersion;
     String fileName;

@@ -1,5 +1,8 @@
 package de.projectmodding.core.controller;
 
+import de.projectmodding.core.enums.ModDataEnum;
+import de.projectmodding.core.model.definition.DefinitionVersionMap;
+import de.projectmodding.core.model.definition.FileDefinitionModel;
 import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 import de.projectmodding.core.service.ModDataGenerationService;
 import de.projectmodding.core.service.RuntimeDataService;
@@ -27,7 +30,14 @@ public class ScriptPanelController implements IScriptPanelController {
     }
 
     @Override
-    public HashMap<String, List<String>> getScriptBlockTypes(String version) {
+    public HashMap<String, HashMap<String, List<String>>> getScriptBlockTypes(String version) {
         return modDataGenerationService.loadScriptBlockTypes(version);
     }
+
+    @Override
+    public FileDefinitionModel getScriptDefinition(String version) {
+        return modDataGenerationService.getModDefinitionModel(version).getScript();
+    }
+
+
 }

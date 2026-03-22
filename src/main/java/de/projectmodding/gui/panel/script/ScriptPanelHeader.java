@@ -1,12 +1,14 @@
 package de.projectmodding.gui.panel.script;
 
 import de.projectmodding.core.component.event.Event;
-import de.projectmodding.core.component.event.Listener;
+import de.projectmodding.core.component.event.event.LoadAttributesEvent;
+import de.projectmodding.core.component.event.system.EventSystem;
+import de.projectmodding.gui.panel.AbstractBasePanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ScriptPanelHeader extends JPanel implements Listener {
+public class ScriptPanelHeader extends AbstractBasePanel {
     private final String SCRIPT_NAME = "Script Name:";
     private final String SCRIPT_MODULE_NAME = "Script Module:";
     private final String BUTTON_SAVE = "Save";
@@ -27,8 +29,8 @@ public class ScriptPanelHeader extends JPanel implements Listener {
     JTextField textFieldModuleName = new JTextField(MIN_TEXT_FIELD_LENGTH);
     JPanel panelModuleName = new JPanel();
 
-    public ScriptPanelHeader(){
-        super();
+    public ScriptPanelHeader(EventSystem eventSystem) {
+        super(eventSystem);
         build();
     }
 
@@ -79,6 +81,14 @@ public class ScriptPanelHeader extends JPanel implements Listener {
 
     @Override
     public <T> void onEvent(Event<T> event) {
+        if (event instanceof LoadAttributesEvent loadEvent) {
+            textFieldScriptName.setText(loadEvent.getData().getScriptBlock().getName());
+            textFieldModuleName.setText(loadEvent.getData().getModuleName());
+        }
+    }
 
+    @Override
+    protected void createListener(EventSystem eventSystem) {
+        eventSystem.registerEvent(LoadAttributesEvent.class, this);
     }
 }

@@ -1,5 +1,6 @@
 package de.projectmodding.core.model.mod.files;
 
+import de.projectmodding.core.enums.ModDataEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
@@ -9,4 +10,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder()
 public class LuaModel extends BaseFile{
     String sourceCode;
+
+    @Override
+    public ModDataEnum getFileType() {
+        return ModDataEnum.LUA;
+    }
 }

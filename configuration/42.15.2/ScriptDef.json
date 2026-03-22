@@ -121,7 +121,6 @@
     "Venison"
   ],
   "scriptBlockType": [
-    "All",
     "AlarmClock",
     "AlarmClockClothing",
     "Animal",
@@ -181,11 +180,20 @@
   ],
   "customTypeMappings": [
     {
-      "parent": "scriptType.item",
+      "parent": "scriptType",
       "child": "scriptBlockType"
     }
   ],
   "attributeList": [
+    {
+      "keyName": "ScriptType",
+      "dataType": "scriptType",
+      "displayName": "Script Type:",
+      "description": "[ScriptType]",
+      "value": "",
+      "action": "Load_Script_Types",
+      "required": true
+    },
     {
       "keyName": "ItemType",
       "dataType": "scriptBlockType",
@@ -198,11 +206,10 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
-        ],
-        "or": []
+        ]
       },
       "required": true
     },
@@ -216,7 +223,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -232,7 +239,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -247,7 +254,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -262,7 +269,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -277,7 +284,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -292,7 +299,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -307,7 +314,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -322,7 +329,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -337,7 +344,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -352,7 +359,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -367,7 +374,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -382,7 +389,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -397,7 +404,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -414,7 +421,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -431,7 +438,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -446,7 +453,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -461,7 +468,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -476,7 +483,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -491,7 +498,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -506,7 +513,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -521,7 +528,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -536,7 +543,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -551,7 +558,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -566,7 +573,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -581,7 +588,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -596,7 +603,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -611,7 +618,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -626,7 +633,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -641,7 +648,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -656,7 +663,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -671,7 +678,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -686,7 +693,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -703,7 +710,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -720,7 +727,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -737,7 +744,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -752,7 +759,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -767,7 +774,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -782,7 +789,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -797,7 +804,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -812,7 +819,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -827,7 +834,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -842,7 +849,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -857,7 +864,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -872,7 +879,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -889,7 +896,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -904,7 +911,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -919,7 +926,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -934,7 +941,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -949,7 +956,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -964,7 +971,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -979,7 +986,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -996,7 +1003,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -1013,7 +1020,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -1030,7 +1037,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -1045,7 +1052,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -1060,7 +1067,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -1075,7 +1082,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -1092,7 +1099,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
@@ -1107,7 +1114,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.All"
+              "scriptBlockType.Normal"
             ]
           }
         ]
