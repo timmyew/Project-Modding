@@ -12,6 +12,11 @@ public class FloatComponent extends AbstractComponentPanel implements IDataTypeC
     }
 
     @Override
+    protected void initAttribute() {
+
+    }
+
+    @Override
     protected void createUIComponents() {
 
     }

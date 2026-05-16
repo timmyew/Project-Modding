@@ -6,6 +6,11 @@ public class BooleanComponent extends AbstractComponentPanel implements IDataTyp
 
 
     @Override
+    protected void initAttribute() {
+
+    }
+
+    @Override
     protected void createUIComponents() {
 
     }

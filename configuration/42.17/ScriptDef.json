@@ -120,7 +120,7 @@
     "Vegetables",
     "Venison"
   ],
-  "scriptBlockType": [
+  "itemType": [
     "AlarmClock",
     "AlarmClockClothing",
     "Animal",
@@ -180,8 +180,8 @@
   ],
   "customTypeMappings": [
     {
-      "parent": "scriptType",
-      "child": "scriptBlockType"
+      "parent": "scriptType.item",
+      "child": "itemType"
     }
   ],
   "attributeList": [
@@ -196,16 +196,25 @@
     },
     {
       "keyName": "ItemType",
-      "dataType": "scriptBlockType",
+      "dataType": "itemType",
       "displayName": "Item Type:",
-      "description": "[ScriptBlockType]",
+      "description": "[ItemType]",
+      "condition": {
+        "and": [
+          {
+            "has": [
+              "scriptType.item"
+            ]
+          }
+        ]
+      },
       "value": "",
-      "action": "Load_Script_Block_Types",
+      "action": "Load_Item_Types",
       "required": true
     },
     {
       "keyName": "displayName",
-      "dataType": "File",
+      "dataType": "String",
       "displayName": "DisplayName:",
       "description": "[ScriptDisplayName]",
       "condition": {
@@ -213,7 +222,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -229,7 +238,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -244,7 +253,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -259,7 +268,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -274,7 +283,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -289,7 +298,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -304,7 +313,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -319,7 +328,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -334,7 +343,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -349,7 +358,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -364,7 +373,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -379,7 +388,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -394,7 +403,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -411,7 +420,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -428,7 +437,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -443,7 +452,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -458,7 +467,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -473,7 +482,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -488,7 +497,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -503,7 +512,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -518,7 +527,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -533,7 +542,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -548,7 +557,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -563,7 +572,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -578,7 +587,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -593,7 +602,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -608,7 +617,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -623,7 +632,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -638,7 +647,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -653,7 +662,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -668,7 +677,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -683,7 +692,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -700,7 +709,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -717,7 +726,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -734,7 +743,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -749,7 +758,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -764,7 +773,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -779,7 +788,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -794,7 +803,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -809,7 +818,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -824,7 +833,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -839,7 +848,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -854,7 +863,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -869,7 +878,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -886,7 +895,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -901,7 +910,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -916,7 +925,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -931,7 +940,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -946,7 +955,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -961,7 +970,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -976,7 +985,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -993,7 +1002,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -1010,7 +1019,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -1027,7 +1036,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -1042,7 +1051,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -1057,7 +1066,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -1072,7 +1081,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -1089,7 +1098,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]
@@ -1104,7 +1113,7 @@
           {
             "has": [
               "scriptType.item",
-              "scriptBlockType.Normal"
+              "itemType.Normal"
             ]
           }
         ]

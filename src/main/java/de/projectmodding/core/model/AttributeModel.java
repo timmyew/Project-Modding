@@ -26,6 +26,7 @@ public class AttributeModel{
     Condition condition;
     Integer min;
     Integer max;
+    String internalData;
 
     public static AttributeModel copy(AttributeModel attributeModel){
         return AttributeModel.builder()
@@ -74,8 +75,8 @@ public class AttributeModel{
 
         public static Condition copy(Condition condition){
             return condition != null ? new Condition(
-                    condition.getAnd().stream().map(And::copy).collect(Collectors.toCollection(ArrayList::new)),
-                    condition.getOr().stream().map(Or::copy).collect(Collectors.toCollection(ArrayList::new))
+                    condition.getAnd() != null ? condition.getAnd().stream().map(And::copy).collect(Collectors.toCollection(ArrayList::new)) : null,
+                    condition.getOr() != null ? condition.getOr().stream().map(Or::copy).collect(Collectors.toCollection(ArrayList::new)) : null
             ) : null;
         }
     }

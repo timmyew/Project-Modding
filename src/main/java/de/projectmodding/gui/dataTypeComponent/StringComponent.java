@@ -9,10 +9,16 @@ public class StringComponent extends AbstractComponentPanel implements IDataType
 
 
     @Override
+    protected void initAttribute() {
+
+    }
+
+    @Override
     protected void createUIComponents() {
         JPanel dataPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
         add(dataPanel, BorderLayout.CENTER);
 
+        label = new JLabel(attribute.getDisplayName());
         dataPanel.add(label);
         dataPanel.add(textField);
     }

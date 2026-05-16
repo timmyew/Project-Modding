@@ -1,5 +1,6 @@
 package de.projectmodding.core.model.intern;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data

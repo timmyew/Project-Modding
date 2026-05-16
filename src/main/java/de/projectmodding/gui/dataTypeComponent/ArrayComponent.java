@@ -2,6 +2,11 @@ package de.projectmodding.gui.dataTypeComponent;
 
 public class ArrayComponent extends AbstractComponentPanel implements IDataTypeComponent {
     @Override
+    protected void initAttribute() {
+
+    }
+
+    @Override
     protected void createUIComponents() {
 
     }

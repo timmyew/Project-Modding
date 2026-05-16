@@ -15,4 +15,8 @@ public class MathUtils {
             return defaultValue;
         }
     }
+
+    public static int tryParseInt(String string) {
+        return tryParseInt(string, 0);
+    }
 }

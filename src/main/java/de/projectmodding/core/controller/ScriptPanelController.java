@@ -38,6 +38,4 @@ public class ScriptPanelController implements IScriptPanelController {
     public FileDefinitionModel getScriptDefinition(String version) {
         return modDataGenerationService.getModDefinitionModel(version).getScript();
     }
-
-
 }

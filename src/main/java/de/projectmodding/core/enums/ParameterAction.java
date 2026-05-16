@@ -1,7 +1,7 @@
 package de.projectmodding.core.enums;
 
 public enum ParameterAction {
-    Load_Script_Block_Types("Load_Script_Block_Types"),
+    Load_Item_Types("Load_Item_Types"),
     Load_Script_Types("Load_Script_Types"),
     Transform_Name("Transform_Name"),
     Transform_Version("Transform_Version");

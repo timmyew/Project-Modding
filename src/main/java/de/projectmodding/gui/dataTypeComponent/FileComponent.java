@@ -12,6 +12,11 @@ public class FileComponent extends AbstractComponentPanel implements IDataTypeCo
     }
 
     @Override
+    protected void initAttribute() {
+
+    }
+
+    @Override
     protected void createUIComponents() {
 
     }

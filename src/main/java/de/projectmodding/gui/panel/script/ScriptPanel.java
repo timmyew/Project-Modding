@@ -83,24 +83,7 @@ public class ScriptPanel extends AbstractBasePanel {
         scriptBlockList = new JList<>();
         scriptBlockList.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                int index = scriptBlockList.getSelectedIndex();
-
-                if (index != -1) {
-                    ScriptBlock block = scriptBlockList.getModel().getElementAt(index);
-                    getEventSystem().fireEvent(new LoadAttributesEvent(
-                            LoadAttributesEventModel.builder()
-                                    .blockTypeItemTypeMap(controller.getScriptBlockTypes(currentModVersion))
-                                    .scriptBlock(block)
-                                    .moduleName(currentModuleName)
-                                    .definitionModel(controller.getScriptDefinition(currentModVersion))
-                                    .componentManager(componentManager)
-                                    .build()
-                    ));
-                    attributePanel.setVisible(true);
-                }
-                else
-                    attributePanel.setVisible(false);
-
+                selectScriptBlock(scriptBlockList.getSelectedIndex());
             }
         });
         JScrollPane scrollPane = new JScrollPane(scriptBlockList);
@@ -142,7 +125,19 @@ public class ScriptPanel extends AbstractBasePanel {
                 if (option == JOptionPane.YES_OPTION && scriptBlockList.getModel() instanceof DefaultListModel<ScriptBlock> model) {
                     controller.removeScriptBlock(currentModName, currentModVersion, currentModFileName,
                             model.getElementAt(selectedIndex).getName());
-                    model.removeElementAt(scriptBlockList.getSelectedIndex());
+
+                    model.removeElementAt(selectedIndex);
+
+                    if (selectedIndex >= scriptBlockList.getModel().getSize() - 1 && scriptBlockList.getModel().getSize() > 0){
+                        selectScriptBlock(scriptBlockList.getModel().getSize() - 1);
+                        scriptBlockList.setSelectedIndex(scriptBlockList.getModel().getSize() - 1);
+                    }
+                    else if (selectedIndex <= scriptBlockList.getModel().getSize() - 1 && selectedIndex > 0){
+                        selectScriptBlock(selectedIndex);
+                        scriptBlockList.setSelectedIndex(selectedIndex);
+                    }
+                    else
+                        selectScriptBlock(selectedIndex - 1);
                 }
             }
         });
@@ -182,6 +177,24 @@ public class ScriptPanel extends AbstractBasePanel {
         }
 
         return maxNumber;
+    }
+
+    private void selectScriptBlock(int index) {
+        if (index != -1) {
+            ScriptBlock block = scriptBlockList.getModel().getElementAt(index);
+            getEventSystem().fireEvent(new LoadAttributesEvent(
+                    LoadAttributesEventModel.builder()
+                            .blockTypeItemTypeMap(controller.getScriptBlockTypes(currentModVersion))
+                            .scriptBlock(block)
+                            .moduleName(currentModuleName)
+                            .definitionModel(controller.getScriptDefinition(currentModVersion))
+                            .componentManager(componentManager)
+                            .build()
+            ));
+            attributePanel.setVisible(true);
+        }
+        else
+            attributePanel.setVisible(false);
     }
 
     private JPanel createAttributePanel() {

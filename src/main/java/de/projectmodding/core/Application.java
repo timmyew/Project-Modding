@@ -14,7 +14,6 @@ import de.projectmodding.core.service.RuntimeDataService;
 import de.projectmodding.core.service.TreeGeneratorService;
 import de.projectmodding.gui.form.MainForm;
 import de.projectmodding.gui.dataTypeComponent.*;
-import de.projectmodding.gui.generator.ScriptPanelAttributeGenerator;
 import de.projectmodding.gui.manager.DatatypeComponentManager;
 import de.projectmodding.gui.manager.FilePanelManager;
 import de.projectmodding.gui.panel.script.ScriptPanel;
@@ -48,7 +47,6 @@ public class Application {
 
         //EventSystem
         EventSystem eventSystem = EventSystem.getInstance();
-        eventSystem.registerEvent(StateChangeEvent.class, ScriptPanelAttributeGenerator.getInstance());
 
         //GUI Datatype Manager
         DatatypeComponentManager datatypeComponentManager = new DatatypeComponentManager();
