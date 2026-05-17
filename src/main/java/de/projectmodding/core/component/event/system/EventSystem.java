@@ -11,13 +11,7 @@ public final class EventSystem {
     private static EventSystem instance;
     private final HashMap<Class<? extends Event<?>> , List<Listener>> eventMap = new HashMap<>();
 
-    private EventSystem() {
-    }
-    public static EventSystem getInstance() {
-        if (instance == null) {
-            instance = new EventSystem();
-        }
-        return instance;
+    public EventSystem() {
     }
 
     public <T> void registerEvent(Class<? extends Event<?>> eventKey, Listener listener) {

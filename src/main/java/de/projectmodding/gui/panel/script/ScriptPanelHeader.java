@@ -1,5 +1,6 @@
 package de.projectmodding.gui.panel.script;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.Event;
 import de.projectmodding.core.component.event.event.LoadAttributesEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
@@ -29,8 +30,8 @@ public class ScriptPanelHeader extends AbstractBasePanel {
     JTextField textFieldModuleName = new JTextField(MIN_TEXT_FIELD_LENGTH);
     JPanel panelModuleName = new JPanel();
 
-    public ScriptPanelHeader(EventSystem eventSystem) {
-        super(eventSystem);
+    public ScriptPanelHeader(Container mainContainer) {
+        super(mainContainer);
         build();
     }
 

@@ -25,17 +25,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public final class DefinitionLoader {
     private final String basePath = FolderUtils.getWorkingDir();
-    private static DefinitionLoader instance = null;
 
-    private DefinitionLoader() {
-    }
-
-    public static DefinitionLoader getInstance() {
-        if (instance == null) {
-            instance = new DefinitionLoader();
-        }
-        return instance;
-    }
+    public  DefinitionLoader() {}
 
     public DefinitionVersionMap load() {
         List<String> versionList = loadVersion().getVersionList();

@@ -1,11 +1,13 @@
 package de.projectmodding.gui.form;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.Event;
 import de.projectmodding.core.component.event.event.ModCreationEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
 import de.projectmodding.core.component.factory.DialogFactory;
 import de.projectmodding.core.component.validator.NewModFormValidator;
 import de.projectmodding.core.controller.INewPackageController;
+import de.projectmodding.core.controller.NewPackageController;
 import de.projectmodding.core.model.mod.ModPackageModel;
 import de.projectmodding.gui.constant.FlatLafIcons;
 import lombok.Setter;
@@ -17,9 +19,6 @@ public final class NewPackageForm extends BaseFrame {
     private final int HEIGHT_PERCENTAGE = 15;
     private final int WIDTH_PERCENTAGE = 20;
     private final String DEFAULT_VERSION = "1.0.0";
-
-    @Setter
-    private INewPackageController controller;
 
     private JButton createButton;
     private JPanel bottomPanel;
@@ -34,8 +33,8 @@ public final class NewPackageForm extends BaseFrame {
     private JLabel packageVersionLabel;
     private JTextField packageVersionTextField;
 
-    NewPackageForm(EventSystem eventSystem) {
-        super(eventSystem);
+    public NewPackageForm(Container mainContainer) {
+        super(mainContainer);
         initListeners();
     }
 
@@ -44,7 +43,7 @@ public final class NewPackageForm extends BaseFrame {
         locationButton.setIcon(FlatLafIcons.FILE_CHOOSER_ICON);
         locationButton.setText("");
         locationButton.addActionListener(action -> {
-            locationTextField.setText(controller.chooseLocation());
+            locationTextField.setText(container.resolve(NewPackageController.class).chooseLocation());
         });
 
 
@@ -52,7 +51,7 @@ public final class NewPackageForm extends BaseFrame {
         createButton.addActionListener(action -> {
             try{
                 NewModFormValidator.validate(packageNameTextField.getText(), locationTextField.getText());
-                ModPackageModel modPackageModel = controller.createPackage(
+                ModPackageModel modPackageModel = container.resolve(NewPackageController.class).createPackage(
                         packageNameTextField.getText(),
                         locationTextField.getText(),
                         Objects.requireNonNull(gameVersionCombobox.getSelectedItem()).toString(),
@@ -60,7 +59,7 @@ public final class NewPackageForm extends BaseFrame {
                 );
 
                 setVisible(false);
-                eventSystem.fireEvent(new ModCreationEvent(modPackageModel));
+                container.resolve(EventSystem.class).fireEvent(new ModCreationEvent(modPackageModel));
             }
             catch(Exception exception){
                 DialogFactory.createErrorDialog(exception.getMessage(), this);
@@ -83,7 +82,7 @@ public final class NewPackageForm extends BaseFrame {
     }
 
     private void fetchData(){
-        controller.loadGameVersionList().forEach(version -> {
+        container.resolve(NewPackageController.class).loadGameVersionList().forEach(version -> {
             gameVersionCombobox.addItem(version);
         });
         packageVersionTextField.setText(DEFAULT_VERSION);

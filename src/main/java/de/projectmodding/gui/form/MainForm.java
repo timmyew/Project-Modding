@@ -1,12 +1,12 @@
 package de.projectmodding.gui.form;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.Event;
 import de.projectmodding.core.component.event.event.EmptyItemListEvent;
 import de.projectmodding.core.component.event.event.FillItemListEvent;
 import de.projectmodding.core.component.event.event.ModCreationEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
-import de.projectmodding.core.component.loader.DefinitionLoader;
-import de.projectmodding.core.controller.IMainController;
+import de.projectmodding.core.controller.MainController;
 import de.projectmodding.core.model.definition.DefinitionVersionMap;
 import de.projectmodding.core.model.event.FillItemEventModel;
 import de.projectmodding.core.model.mod.ModPackageModel;
@@ -14,9 +14,6 @@ import de.projectmodding.gui.manager.FilePanelManager;
 import de.projectmodding.gui.popup.TreeJPopupMenu;
 import de.projectmodding.gui.tree.node.ModPackageTreeNode;
 import de.projectmodding.gui.tree.renderer.ModPackageTreeCellRenderer;
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.tree.DefaultTreeModel;
@@ -25,19 +22,12 @@ import java.awt.*;
 import java.awt.event.*;
 
 public final class MainForm extends BaseFrame {
+    private DefinitionVersionMap definitionVersionMap;
+
     private final int HEIGHT_PERCENTAGE = 70;
     private final int WIDTH_PERCENTAGE = 47;
     private final int MINIMUM_WIDTH = 1200;
     private final int MINIMUM_HEIGHT = 800;
-    private final DefinitionLoader definitionLoader = DefinitionLoader.getInstance();
-
-    @Getter
-    private final NewPackageForm newPackageForm = new NewPackageForm(eventSystem);
-    @Setter
-    private IMainController controller;
-
-    private DefinitionVersionMap definitionVersionMap;
-
     private final JMenuBar menuBar = new JMenuBar();
     private JTree modTree;
     private JPanel mainPanel;
@@ -46,18 +36,16 @@ public final class MainForm extends BaseFrame {
     private ModPackageTreeNode selectedNode = null;
     private TreeJPopupMenu treePopupMenu;
     private TreePath expandedPath = null;
-    private final FilePanelManager filePanelManager;
 
-    public MainForm(EventSystem eventSystem, FilePanelManager filePanelManager) {
-        this.filePanelManager = filePanelManager;
-        super(eventSystem);
+    public MainForm(Container mainContainer) {
+        super(mainContainer);
     }
 
     @Override
     public void showForm() {
         init();
         initForm("Project-Modding", mainPanel, HEIGHT_PERCENTAGE, WIDTH_PERCENTAGE, EXIT_ON_CLOSE);
-        controller.loadDefinition();
+        container.resolve(MainController.class).loadDefinition();
     }
 
     private void init() {
@@ -103,7 +91,7 @@ public final class MainForm extends BaseFrame {
         JMenuItem newItem = new JMenuItem("New");
         newItem.addActionListener(Action -> {
             if (selectedNode != null) {
-                ModPackageTreeNode node = new ModPackageTreeNode(controller.generateModData(selectedNode.getVersion(),
+                ModPackageTreeNode node = new ModPackageTreeNode(container.resolve(MainController.class).generateModData(selectedNode.getVersion(),
                         selectedNode.getModName(), selectedNode.getKey()));
                 selectedNode.add(node);
 
@@ -150,14 +138,14 @@ public final class MainForm extends BaseFrame {
     }
 
     private void loadAttributePanel(ModPackageTreeNode modPackageTreeNode, String modName, String version) {
-        JPanel panel = filePanelManager.getPanel(modPackageTreeNode.getBaseFile().getClass());
+        JPanel panel = container.resolve(FilePanelManager.class).getPanel(modPackageTreeNode.getBaseFile().getClass());
         if (panel != null) {
             addJPanelToDefaultDetailPanel(panel);
 
-            eventSystem.fireEvent(new FillItemListEvent(
+            container.resolve(EventSystem.class).fireEvent(new FillItemListEvent(
                             FillItemEventModel.builder()
                                     .scriptBlocks(
-                                            controller.getScriptBlocks(modName,
+                                            container.resolve(MainController.class).getScriptBlocks(modName,
                                                     version,
                                                     modPackageTreeNode.getBaseFile().getFileName())
                                     )
@@ -196,7 +184,7 @@ public final class MainForm extends BaseFrame {
     }
 
     private void removeAttributePanel() {
-        eventSystem.fireEvent(new EmptyItemListEvent());
+        container.resolve(EventSystem.class).fireEvent(new EmptyItemListEvent());
         removeJPanelFromDefaultDetailPanel();
     }
 
@@ -229,7 +217,7 @@ public final class MainForm extends BaseFrame {
 
     @Override
     protected void registerEvents() {
-        eventSystem.registerEvent(ModCreationEvent.class, this);
+        container.resolve(EventSystem.class).registerEvent(ModCreationEvent.class, this);
     }
 
     private void createMenuBar() {
@@ -238,7 +226,7 @@ public final class MainForm extends BaseFrame {
         JMenu fileMenu = new JMenu("File");
         JMenuItem newMenuItem = new JMenuItem("New");
         newMenuItem.addActionListener(e -> {
-            newPackageForm.showForm();
+            container.resolve(NewPackageForm.class).showForm();
         });
         JMenuItem openMenuItem = new JMenuItem("Open");
         JMenuItem saveMenuItem = new JMenuItem("Save");
@@ -261,7 +249,7 @@ public final class MainForm extends BaseFrame {
     public <T> void onEvent(Event<T> event) {
         if (event instanceof ModCreationEvent) {
             ModPackageModel eventData = ((ModCreationEvent) event).getData();
-            DefaultTreeModel defaultTreeModel = controller.generateTreeModel(eventData);
+            DefaultTreeModel defaultTreeModel = container.resolve(MainController.class).generateTreeModel(eventData);
             modTree.setModel(defaultTreeModel);
         }
     }

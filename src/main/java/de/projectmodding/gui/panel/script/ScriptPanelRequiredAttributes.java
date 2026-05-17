@@ -1,5 +1,6 @@
 package de.projectmodding.gui.panel.script;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.Event;
 import de.projectmodding.core.component.event.event.LoadAttributesEvent;
 import de.projectmodding.core.component.event.event.ReloadAttributesEvent;
@@ -8,6 +9,7 @@ import de.projectmodding.core.component.query.definition.DefinitionQuery;
 import de.projectmodding.core.component.query.definition.ModDefinitionQuery;
 import de.projectmodding.core.model.event.LoadAttributesEventModel;
 import de.projectmodding.gui.generator.ScriptPanelRequiredAttributeGenerator;
+import de.projectmodding.gui.manager.DatatypeComponentManager;
 import de.projectmodding.gui.panel.AbstractBasePanel;
 
 import javax.swing.*;
@@ -17,8 +19,8 @@ public class ScriptPanelRequiredAttributes extends AbstractBasePanel {
     private final String REQUIRED_ATTRIBUTES = "Required Attributes";
     private LoadAttributesEventModel cachedLoadEventData;
 
-    public ScriptPanelRequiredAttributes(EventSystem eventSystem) {
-        super(eventSystem);
+    public ScriptPanelRequiredAttributes(Container mainContainer) {
+        super(mainContainer);
         build();
     }
 
@@ -41,8 +43,8 @@ public class ScriptPanelRequiredAttributes extends AbstractBasePanel {
     }
 
     private void loadAttributes(LoadAttributesEventModel loadEventData) {
-        ScriptPanelRequiredAttributeGenerator.getInstance().generate(this, loadEventData.getDefinitionModel(),
-                loadEventData.getScriptBlock(), loadEventData.getComponentManager());
+        container.resolve(ScriptPanelRequiredAttributeGenerator.class).generate(this, loadEventData.getDefinitionModel(),
+                loadEventData.getScriptBlock(), container.resolve(DatatypeComponentManager.class));
         repaint();
     }
 

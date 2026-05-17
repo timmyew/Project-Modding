@@ -1,8 +1,13 @@
 package de.projectmodding.gui.panel.script;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.Event;
 import de.projectmodding.core.component.event.event.LoadAttributesEvent;
+import de.projectmodding.core.component.event.event.ReloadAttributesEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
+import de.projectmodding.core.component.query.definition.DefinitionQuery;
+import de.projectmodding.core.component.query.definition.FileDefinitionModelQuery;
+import de.projectmodding.core.model.definition.FileDefinitionModel;
 import de.projectmodding.gui.constant.FlatLafIcons;
 import de.projectmodding.gui.panel.AbstractBasePanel;
 
@@ -13,8 +18,8 @@ public class ScriptPanelAttributes extends AbstractBasePanel {
 
     private final String NORMAL_ATTRIBUTES = "Attributes";
 
-    public ScriptPanelAttributes(EventSystem eventSystem) {
-        super(eventSystem);
+    public ScriptPanelAttributes(Container mainContainer) {
+        super(mainContainer);
         build();
     }
 
@@ -39,7 +44,11 @@ public class ScriptPanelAttributes extends AbstractBasePanel {
 
     @Override
     public <T> void onEvent(Event<T> event) {
-
+        if (event instanceof LoadAttributesEvent loadEvent) {
+            //FileDefinitionModelQuery.on(loadEvent.getData().getDefinitionModel())
+        }
+        else if (event instanceof ReloadAttributesEvent) {
+        }
     }
 
     @Override

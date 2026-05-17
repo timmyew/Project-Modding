@@ -1,5 +1,6 @@
 package de.projectmodding.core.service;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.Event;
 import de.projectmodding.core.component.event.Listener;
 import de.projectmodding.core.component.factory.file.*;
@@ -30,15 +31,15 @@ import java.util.stream.Collectors;
 public final class ModDataGenerationService implements Listener {
     private final HashMap<ModDataKey, IFactory<? extends BaseFile>> fileFactoryMap = new HashMap<>();
     private HashMap<String, HashMap<String, HashMap<String, List<String>>>> cachedScriptBlockTypes;
-    private final RuntimeDataService runtimeDataService;
+    private final Container container;
 
-    public ModDataGenerationService(RuntimeDataService runtimeDataService) {
-        this.runtimeDataService = runtimeDataService;
+    public ModDataGenerationService(Container mainContainer) {
+        this.container = mainContainer;
         init();
     }
 
     public BaseFile createFile(ModPackageModel modPackageModel, String modName, ModDataKey key, String version) {
-        ModDefinitionModel definition = runtimeDataService.getByType(DefinitionVersionMap.class).getMap().get(version);
+        ModDefinitionModel definition = container.resolve(RuntimeDataService.class).getByType(DefinitionVersionMap.class).getMap().get(version);
 
         if (fileFactoryMap.containsKey(key)) {
             final BaseFile baseFile = fileFactoryMap.get(key).create(definition, modPackageModel.getRootPath());
@@ -113,7 +114,7 @@ public final class ModDataGenerationService implements Listener {
 
     public List<ScriptBlock> searchAndGetScriptBlocks(String modName, String modVersion, String fileName) {
         AtomicReference<List<ScriptBlock>> scriptBlocks = new AtomicReference<>();
-        ModPackageModel modPackageModel = runtimeDataService.getByType(ModPackageModel.class);
+        ModPackageModel modPackageModel = container.resolve(RuntimeDataService.class).getByType(ModPackageModel.class);
 
         modPackageModel.getModList().forEach(mod -> {
             if (mod.getModName().equals(modName)) {
@@ -242,7 +243,7 @@ public final class ModDataGenerationService implements Listener {
     }
 
     private void iterateScriptBlock(String modName, String version, Consumer<? super ScriptModel> action) {
-        ModPackageModel modPackageModel = runtimeDataService.getByType(ModPackageModel.class);
+        ModPackageModel modPackageModel = container.resolve(RuntimeDataService.class).getByType(ModPackageModel.class);
         modPackageModel.getModList().forEach(mod -> {
             if (mod.getModName().equals(modName)) {
                 if (version.equals(ModDataEnum.COMMON.getValue())) {
@@ -276,7 +277,7 @@ public final class ModDataGenerationService implements Listener {
     }
 
     private ModDefinitionModel getDefinitionModelByVersion(String version){
-        DefinitionVersionMap versionMap = runtimeDataService.getByType(DefinitionVersionMap.class);
+        DefinitionVersionMap versionMap = container.resolve(RuntimeDataService.class).getByType(DefinitionVersionMap.class);
 
         if (versionMap.getMap().containsKey(version)) {
             return versionMap.getMap().get(version);

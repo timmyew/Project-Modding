@@ -1,5 +1,6 @@
 package de.projectmodding.core.service;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.exception.RuntimeDataServiceException;
 
 import java.util.HashMap;

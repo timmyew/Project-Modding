@@ -14,7 +14,6 @@ public class DefinitionQuery extends AbstractQuery<DefinitionVersionMap> {
         return new DefinitionQuery(definitionVersionMap);
     }
 
-
     public ModDefinitionQuery byVersion(String version) {
         if (model.getMap().containsKey(version)) {
             return new ModDefinitionQuery(model.getMap().get(version));

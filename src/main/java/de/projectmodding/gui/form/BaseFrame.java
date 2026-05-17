@@ -1,5 +1,6 @@
 package de.projectmodding.gui.form;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.Listener;
 import de.projectmodding.core.component.event.system.EventSystem;
 
@@ -9,11 +10,11 @@ import java.awt.*;
 public abstract class BaseFrame extends JFrame implements Listener {
 
     private final GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-    protected final EventSystem eventSystem;
+    protected final Container container;
 
-    protected BaseFrame(EventSystem eventSystem) {
+    protected BaseFrame(Container mainContainer) {
         super();
-        this.eventSystem = eventSystem;
+        this.container = mainContainer;
     }
 
     protected void initForm(String title, JPanel contentPanel, int heightPercent, int widthPercent, int closeAction) {

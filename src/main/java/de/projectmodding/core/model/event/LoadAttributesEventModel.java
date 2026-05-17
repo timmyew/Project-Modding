@@ -17,5 +17,4 @@ public class LoadAttributesEventModel {
     String moduleName;
     ScriptBlock scriptBlock;
     FileDefinitionModel definitionModel;
-    DatatypeComponentManager componentManager;
 }

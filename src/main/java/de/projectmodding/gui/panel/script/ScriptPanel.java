@@ -1,18 +1,17 @@
 package de.projectmodding.gui.panel.script;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.Event;
 import de.projectmodding.core.component.event.event.EmptyItemListEvent;
 import de.projectmodding.core.component.event.event.FillItemListEvent;
 import de.projectmodding.core.component.event.event.LoadAttributesEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
-import de.projectmodding.core.controller.IScriptPanelController;
+import de.projectmodding.core.controller.ScriptPanelController;
 import de.projectmodding.core.model.event.LoadAttributesEventModel;
 import de.projectmodding.core.model.mod.files.data.ScriptBlock;
 import de.projectmodding.core.util.MathUtils;
 import de.projectmodding.gui.constant.FlatLafIcons;
-import de.projectmodding.gui.manager.DatatypeComponentManager;
 import de.projectmodding.gui.panel.AbstractBasePanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -21,11 +20,9 @@ import java.awt.event.MouseEvent;
 
 public class ScriptPanel extends AbstractBasePanel {
     private JList<ScriptBlock> scriptBlockList;
-    private final DatatypeComponentManager componentManager;
     private final ScriptPanelHeader scriptPanelHeader;
     private final ScriptPanelRequiredAttributes scriptPanelRequiredAttribute;
     private final ScriptPanelAttributes scriptPanelAttributes;
-    private final IScriptPanelController controller;
     private JPanel attributePanel = null;
 
     private String currentModVersion = "";
@@ -34,14 +31,11 @@ public class ScriptPanel extends AbstractBasePanel {
     private String currentModuleName = "";
 
 
-    public ScriptPanel(EventSystem eventSystem, DatatypeComponentManager componentManager, IScriptPanelController controller) {
-        super(eventSystem);
-        this.scriptPanelHeader = new ScriptPanelHeader(eventSystem);
-        this.scriptPanelRequiredAttribute = new ScriptPanelRequiredAttributes(getEventSystem());
-        this.scriptPanelAttributes = new ScriptPanelAttributes(getEventSystem());
-
-        this.controller = controller;
-        this.componentManager = componentManager;
+    public ScriptPanel(Container mainContainer) {
+        super(mainContainer);
+        this.scriptPanelHeader = new ScriptPanelHeader(mainContainer);
+        this.scriptPanelRequiredAttribute = new ScriptPanelRequiredAttributes(mainContainer);
+        this.scriptPanelAttributes = new ScriptPanelAttributes(mainContainer);
         createComponents();
     }
 
@@ -123,7 +117,7 @@ public class ScriptPanel extends AbstractBasePanel {
                         "Delete?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
                 if (option == JOptionPane.YES_OPTION && scriptBlockList.getModel() instanceof DefaultListModel<ScriptBlock> model) {
-                    controller.removeScriptBlock(currentModName, currentModVersion, currentModFileName,
+                    container.resolve(ScriptPanelController.class).removeScriptBlock(currentModName, currentModVersion, currentModFileName,
                             model.getElementAt(selectedIndex).getName());
 
                     model.removeElementAt(selectedIndex);
@@ -148,7 +142,7 @@ public class ScriptPanel extends AbstractBasePanel {
         JButton addButton = new JButton(FlatLafIcons.PLUS_ICON_X16);
         addButton.addActionListener(e -> {
             if (scriptBlockList.getModel() instanceof DefaultListModel<ScriptBlock> defaultModel) {
-                ScriptBlock newScriptBlock = controller.createScriptBlock(
+                ScriptBlock newScriptBlock = container.resolve(ScriptPanelController.class).createScriptBlock(
                         currentModName,
                         currentModVersion,
                         currentModFileName,
@@ -182,13 +176,12 @@ public class ScriptPanel extends AbstractBasePanel {
     private void selectScriptBlock(int index) {
         if (index != -1) {
             ScriptBlock block = scriptBlockList.getModel().getElementAt(index);
-            getEventSystem().fireEvent(new LoadAttributesEvent(
+            container.resolve(EventSystem.class).fireEvent(new LoadAttributesEvent(
                     LoadAttributesEventModel.builder()
-                            .blockTypeItemTypeMap(controller.getScriptBlockTypes(currentModVersion))
+                            .blockTypeItemTypeMap(container.resolve(ScriptPanelController.class).getScriptBlockTypes(currentModVersion))
                             .scriptBlock(block)
                             .moduleName(currentModuleName)
-                            .definitionModel(controller.getScriptDefinition(currentModVersion))
-                            .componentManager(componentManager)
+                            .definitionModel(container.resolve(ScriptPanelController.class).getScriptDefinition(currentModVersion))
                             .build()
             ));
             attributePanel.setVisible(true);

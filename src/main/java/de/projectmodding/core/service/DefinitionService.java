@@ -1,16 +1,17 @@
 package de.projectmodding.core.service;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.loader.DefinitionLoader;
 import de.projectmodding.core.model.definition.DefinitionVersionMap;
 
 public class DefinitionService {
-    private final DefinitionLoader  definitionLoader = DefinitionLoader.getInstance();
+    private final Container container;
 
-    public DefinitionService(){
-
+    public DefinitionService(Container mainContainer) {
+        this.container = mainContainer;
     }
 
     public DefinitionVersionMap load(){
-        return definitionLoader.load();
+        return container.resolve(DefinitionLoader.class).load();
     }
 }

@@ -1,5 +1,6 @@
 package de.projectmodding.core.controller;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.factory.DialogFactory;
 import de.projectmodding.core.component.factory.ModPackageFactory;
 import de.projectmodding.core.model.definition.DefinitionVersionMap;
@@ -11,18 +12,14 @@ import de.projectmodding.gui.form.NewPackageForm;
 import java.util.List;
 
 public class NewPackageController implements INewPackageController {
-    private final RuntimeDataService runtimeDataService;
-    private final ModDataGenerationService modDataGenerationService;
-    private final NewPackageForm view;
-    public NewPackageController(NewPackageForm view, RuntimeDataService runtimeDataService, ModDataGenerationService modDataGenerationService) {
-        this.view = view;
-        this.runtimeDataService = runtimeDataService;
-        this.modDataGenerationService = modDataGenerationService;
+    private final Container container;
+    public NewPackageController(Container mainContainer) {
+        this.container =  mainContainer;
     }
 
     @Override
     public String chooseLocation() {
-        return DialogFactory.createFolderFileDialogAndGetPath(view, "Choose the Project Directory");
+        return DialogFactory.createFolderFileDialogAndGetPath(container.resolve(NewPackageForm.class), "Choose the Project Directory");
     }
 
     @Override
@@ -32,9 +29,10 @@ public class NewPackageController implements INewPackageController {
                 rootPath,
                 version,
                 packageVersion,
-                runtimeDataService.getByType(DefinitionVersionMap.class)
+                container.resolve(RuntimeDataService.class).getByType(DefinitionVersionMap.class)
         );
 
+        RuntimeDataService runtimeDataService = container.resolve(RuntimeDataService.class);
         runtimeDataService.remove(packageModel.getClass());
         runtimeDataService.save(packageModel);
         return packageModel;
@@ -42,6 +40,6 @@ public class NewPackageController implements INewPackageController {
 
     @Override
     public List<String> loadGameVersionList() {
-        return runtimeDataService.getByType(DefinitionVersionMap.class).getVersionList();
+        return container.resolve(RuntimeDataService.class).getByType(DefinitionVersionMap.class).getVersionList();
     }
 }

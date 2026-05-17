@@ -1,5 +1,6 @@
 package de.projectmodding.gui.generator;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.event.ReloadAttributesEvent;
 import de.projectmodding.core.component.event.system.EventSystem;
 import de.projectmodding.core.constant.definition.AttributeConstants;
@@ -22,16 +23,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class ScriptPanelRequiredAttributeGenerator {
-
-    private static ScriptPanelRequiredAttributeGenerator instance;
     private final List<AbstractComponentPanel> clearingList = new ArrayList<>();
+    private final Container container;
 
-    public static ScriptPanelRequiredAttributeGenerator getInstance()
-    {
-        if (instance == null){
-            instance = new ScriptPanelRequiredAttributeGenerator();
-        }
-        return instance;
+    public ScriptPanelRequiredAttributeGenerator(Container mainContainer) {
+        this.container = mainContainer;
     }
 
     public void generate(JPanel viewPanel, FileDefinitionModel definitionModel, ScriptBlock block, DatatypeComponentManager componentManager){
@@ -40,7 +36,7 @@ public class ScriptPanelRequiredAttributeGenerator {
         if (block.getAttributes().isEmpty())
             generateRequiredAttributes(definitionModel, block);
 
-        generateGUI(viewPanel, definitionModel, block, componentManager);
+        generateGUI(viewPanel, block, componentManager);
     }
 
     private void cleanUp(){
@@ -48,7 +44,7 @@ public class ScriptPanelRequiredAttributeGenerator {
         clearingList.clear();
     }
 
-    private void generateGUI(JPanel viewPanel, FileDefinitionModel definitionModel, ScriptBlock block, DatatypeComponentManager componentManager){
+    private void generateGUI(JPanel viewPanel, ScriptBlock block, DatatypeComponentManager componentManager){
         block.getAttributes().forEach(attribute -> {
             if (attribute.getRequired() && attribute.getAction() != null){
                 AbstractComponentPanel component = createExistingAttributePanel(attribute, componentManager);
@@ -56,7 +52,7 @@ public class ScriptPanelRequiredAttributeGenerator {
                     component.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            EventSystem.getInstance().fireEvent(new ReloadAttributesEvent(null));
+                            container.resolve(EventSystem.class).fireEvent(new ReloadAttributesEvent(null));
                         }
                     });
 

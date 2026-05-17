@@ -1,5 +1,6 @@
 package de.projectmodding.core.service;
 
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.enums.ModDataEnum;
 import de.projectmodding.core.enums.ModDataKey;
 import de.projectmodding.core.model.mod.ModData;
@@ -12,10 +13,12 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public final class TreeGeneratorService {
-    private static TreeGeneratorService instance;
+    private final Container container;
 
 
-    public TreeGeneratorService() {}
+    public TreeGeneratorService(Container mainContainer) {
+        this.container = mainContainer;
+    }
 
 
     public DefaultTreeModel generateTreeModel(ModPackageModel packageModel) {

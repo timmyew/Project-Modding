@@ -1,12 +1,13 @@
 package de.projectmodding.core;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import de.projectmodding.core.component.container.Container;
 import de.projectmodding.core.component.event.system.EventSystem;
+import de.projectmodding.core.component.loader.DefinitionLoader;
 import de.projectmodding.core.controller.MainController;
 import de.projectmodding.core.controller.NewPackageController;
 import de.projectmodding.core.controller.ScriptPanelController;
 import de.projectmodding.core.enums.DataType;
-import de.projectmodding.core.model.event.StateChangeEvent;
 import de.projectmodding.core.model.mod.files.ScriptModel;
 import de.projectmodding.core.service.DefinitionService;
 import de.projectmodding.core.service.ModDataGenerationService;
@@ -14,6 +15,8 @@ import de.projectmodding.core.service.RuntimeDataService;
 import de.projectmodding.core.service.TreeGeneratorService;
 import de.projectmodding.gui.form.MainForm;
 import de.projectmodding.gui.dataTypeComponent.*;
+import de.projectmodding.gui.form.NewPackageForm;
+import de.projectmodding.gui.generator.ScriptPanelRequiredAttributeGenerator;
 import de.projectmodding.gui.manager.DatatypeComponentManager;
 import de.projectmodding.gui.manager.FilePanelManager;
 import de.projectmodding.gui.panel.script.ScriptPanel;
@@ -25,7 +28,8 @@ public class Application {
 
     private boolean isInitialized = false;
 
-    private MainForm mainForm;
+    private final Container mainContainer = new Container();
+
     private Application() {}
 
     public static Application getInstance() {
@@ -36,17 +40,29 @@ public class Application {
     }
 
     public void init() {
+        //Theme
         Locale.setDefault(Locale.ENGLISH);
         FlatMacDarkLaf.setup();
 
+        //Loader
+        mainContainer.register(DefinitionLoader.class, new DefinitionLoader());
+
         //Services
-        TreeGeneratorService treeGeneratorService = new TreeGeneratorService();
-        RuntimeDataService runtimeDataService = new RuntimeDataService();
-        ModDataGenerationService modDataGenerationService = new ModDataGenerationService(runtimeDataService);
-        DefinitionService definitionService = new DefinitionService();
+        mainContainer.register(TreeGeneratorService.class, new TreeGeneratorService(mainContainer));
+        mainContainer.register(RuntimeDataService.class, new RuntimeDataService());
+        mainContainer.register(ModDataGenerationService.class, new ModDataGenerationService(mainContainer));
+        mainContainer.register(DefinitionService.class, new DefinitionService(mainContainer));
+
+        //Generators
+        mainContainer.register(ScriptPanelRequiredAttributeGenerator.class, new ScriptPanelRequiredAttributeGenerator(mainContainer));
 
         //EventSystem
-        EventSystem eventSystem = EventSystem.getInstance();
+        mainContainer.register(EventSystem.class, new EventSystem());
+
+        //Controller
+        mainContainer.register(MainController.class, new MainController(mainContainer));
+        mainContainer.register(NewPackageController.class, new NewPackageController(mainContainer));
+        mainContainer.register(ScriptPanelController.class, new ScriptPanelController(mainContainer));
 
         //GUI Datatype Manager
         DatatypeComponentManager datatypeComponentManager = new DatatypeComponentManager();
@@ -58,23 +74,16 @@ public class Application {
         datatypeComponentManager.registerComponent(DataType.Integer, IntegerComponent.class);
         datatypeComponentManager.registerComponent(DataType.File, FileComponent.class);
         datatypeComponentManager.registerComponent(DataType.Attribute, AttributeChoiceComponent.class);
-
-        ScriptPanelController scriptPanelController = new ScriptPanelController(runtimeDataService, modDataGenerationService);
+        mainContainer.register(DatatypeComponentManager.class, datatypeComponentManager);
 
         //GUI Panel Manager
         FilePanelManager filePanelManager = new FilePanelManager();
-        filePanelManager.registerPanel(ScriptModel.class, new ScriptPanel(eventSystem, datatypeComponentManager, scriptPanelController));
+        filePanelManager.registerPanel(ScriptModel.class, new ScriptPanel(mainContainer));
+        mainContainer.register(FilePanelManager.class, filePanelManager);
 
         //GUI Forms
-        mainForm = new MainForm(eventSystem, filePanelManager);
-
-        //Controller
-        MainController mainController = new MainController(mainForm, runtimeDataService, definitionService, treeGeneratorService, modDataGenerationService);
-        NewPackageController newPackageController = new NewPackageController(mainForm.getNewPackageForm(), runtimeDataService, modDataGenerationService);
-
-        mainForm.setController(mainController);
-        mainForm.getNewPackageForm().setController(newPackageController);
-
+        mainContainer.register(MainForm.class, new MainForm(mainContainer));
+        mainContainer.register(NewPackageForm.class, new NewPackageForm(mainContainer));
 
         isInitialized = true;
     }
@@ -84,7 +93,7 @@ public class Application {
             throw new IllegalStateException("Application was not initialized!");
         }
         else{
-            mainForm.showForm();
+            mainContainer.resolve(MainForm.class).showForm();
         }
     }
 }
